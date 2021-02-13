@@ -1,16 +1,22 @@
 import data from '../../public/data';
+import styles from './Home.module.css';
 
 const Header = () => {
     return (
-        <div className="section" id="home">
+        <div className={styles.section} id="home">
         <div className="container">
-          <div className="header-wrapper">
-            <h2>Hi, I'm {data.name}
-            <span role="img" aria-label="Emoji">
+          <div className="header">
+              <div className={styles.headerWrapper}>
+                  
+              
+            <h2 className={styles.title}>Hi, I'm {data.name}
+            {/* <span role="img" aria-label="Emoji">
                 👋
-              </span>
+              </span> */}
             </h2>
-            <div className="heading-wrapper">
+              
+              </div>
+            <div className={styles.headingWrapper}>
               <h1>
                 {data.headerTagline[0]}
               </h1>
@@ -21,7 +27,7 @@ const Header = () => {
                 {data.headerTagline[2]}
               </h1>
             </div>
-            <p>{data.headerParagraph}</p>
+            <p className={`text-secondary lead ${styles.para}`}>{data.headerParagraph}</p>
             <a
               href={`mailto:${
                 data.contactEmail

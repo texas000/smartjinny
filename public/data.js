@@ -1,6 +1,6 @@
 export default {
   //   Header Details ---------------------
-  name: "Jinny",
+  name: "Smartjinny",
   headerTagline: [
     //Line 1 For Header
     "Fullstack",
