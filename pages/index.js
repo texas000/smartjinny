@@ -5,9 +5,14 @@ import About from '../component/Homepage/About';
 import Work from '../component/Homepage/Work';
 import Skills from '../component/Homepage/Skills';
 import Footer from '../component/Homepage/Footer';
+import React, { useState } from 'react';
+import marked from 'marked';
 
-
-export default function Home() {
+export default function Home({github, readme}) {
+  const [content, setContent]=useState(false)
+  React.useEffect(()=>{
+    setContent(marked(decodeURIComponent(escape(window.atob(readme.content)))))
+  },[])
   return (
     <div className="container">
       <Head>
@@ -16,14 +21,11 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
         <link href="https://fonts.googleapis.com/css2?family=Faster+One&family=Gochi+Hand&family=Heebo:wght@100;200;400;900&display=swap" rel="stylesheet"/>
       </Head>
-{/* 
-      <Promotion></Promotion>
-    <Footer></Footer> */}
       <Header/>
-      <About/>
+      <About readme={content}/>
       <Work/>
       <Skills/>
-      <Footer/>
+      {/* <Footer/> */}
       <style jsx global>{`
         html,
         body {
@@ -34,4 +36,13 @@ export default function Home() {
       `}</style>
     </div>
   )
+}
+
+Home.getInitialProps = async (ctx) => {
+  const res = await fetch('https://api.github.com/repos/texas000/texas000')
+  const json = await res.json()
+
+  const resReadMe = await fetch('https://api.github.com/repos/texas000/texas000/readme')
+  const readMe = await resReadMe.json()
+  return { github: json, readme: readMe }
 }

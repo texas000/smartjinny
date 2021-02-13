@@ -1,12 +1,14 @@
 import data from '../../public/data';
+import styles from './Home.module.css';
 
-const About = () => {
+const About = ({readme}) => {
     return (
-        <div className="section" id="about">
+        <div className={`section ${styles.handwrite}`} id="about">
         <div className="container">
           <div className="about-section">
             <div className="content">
               <h1>About Me</h1>
+              <article dangerouslySetInnerHTML={{__html: readme}}></article>
               <p>
               {data.aboutParaOne}
               <br></br>
