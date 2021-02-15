@@ -1,85 +1,82 @@
-#home {
-    padding-top: 4rem;
-}
-
 .section {
-    padding: 5rem;
+	padding: 6%;
 }
 
 .headerWrapper {
-    -webkit-animation: slide-in-bck-center 1.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-bck-center 1.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	-webkit-animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
-	        animation: text-pop-up-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse both;
-    padding-bottom: 2rem;
+	-webkit-animation: slide-in-bck-center 1.7s
+		cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation: slide-in-bck-center 1.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	-webkit-animation: text-pop-up-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+		reverse both;
+	animation: text-pop-up-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse
+		both;
+	padding-bottom: 2rem;
 }
 
 @-webkit-keyframes text-pop-up-top {
-    0% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-      text-shadow: none;
-    }
-    100% {
-      -webkit-transform: translateY(-50px);
-              transform: translateY(-50px);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-      text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
-    }
-  }
-  @keyframes text-pop-up-top {
-    0% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-      text-shadow: none;
-    }
-    100% {
-      -webkit-transform: translateY(-50px);
-              transform: translateY(-50px);
-      -webkit-transform-origin: 50% 50%;
-              transform-origin: 50% 50%;
-      text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
-    }
-  }
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: none;
+	}
+	100% {
+		-webkit-transform: translateY(-50px);
+		transform: translateY(-50px);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
+			0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
+			0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+	}
+}
+@keyframes text-pop-up-top {
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: none;
+	}
+	100% {
+		-webkit-transform: translateY(-50px);
+		transform: translateY(-50px);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
+			0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
+			0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+	}
+}
 
+@keyframes slide-in-bck-center {
+	0% {
+		-webkit-transform: translateZ(600px);
+		transform: translateZ(600px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		opacity: 1;
+	}
+}
 
-  @keyframes slide-in-bck-center {
-    0% {
-      -webkit-transform: translateZ(600px);
-              transform: translateZ(600px);
-      opacity: 0;
-    }
-    100% {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
-      opacity: 1;
-    }
-  }
-
-  
 .title {
-    font-size: 3rem;
-    text-align: center;
-    font-family: 'Faster One', cursive;
+	font-size: 3rem;
+	font-family: "Faster One", cursive;
 }
 
 .headingWrapper {
-    padding: 2rem;
+	padding: 2rem;
 }
 
 .headingWrapper h1 {
-    font-size: 2rem;
-    text-align: center;
-    color: gray;
-    font-family: 'Gochi Hand', cursive;
+	font-size: 2rem;
+	font-family: "Gochi Hand", cursive;
 }
 
 .para {
-    color: gray;
-    font-family: 'Gochi Hand', cursive;
+	font-family: "Gochi Hand", cursive;
 }

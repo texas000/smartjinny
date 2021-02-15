@@ -22,7 +22,7 @@ export default function Home() {
       <Header/>
       <About/>
       <Work/>
-      <Skills/>
+      {/* <Skills/> */}
       <Footer/>
       <style jsx global>{`
         html,
