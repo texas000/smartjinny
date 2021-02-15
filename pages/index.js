@@ -8,10 +8,12 @@ import Footer from '../component/Homepage/Footer';
 import React, { useState } from 'react';
 import marked from 'marked';
 
-export default function Home({github, readme}) {
+export default function Home({github, readme, blog}) {
   const [content, setContent]=useState(false)
+
   React.useEffect(()=>{
     setContent(marked(decodeURIComponent(escape(window.atob(readme.content)))))
+    console.log(blog)
   },[])
   return (
     <div className="container">
@@ -39,10 +41,15 @@ export default function Home({github, readme}) {
 }
 
 Home.getInitialProps = async (ctx) => {
-  const res = await fetch('https://api.github.com/repos/texas000/texas000')
+  const gitCredential = Buffer.from(`${process.env.GIT_CLIENT_ID}:${process.env.GIT_CLIENT_SECRTE}`, 'binary').toString('base64')
+
+  const res = await fetch(process.env.MAIN_REPO_API, {headers: {Authorization: `Basic ${gitCredential}`}})
   const json = await res.json()
 
-  const resReadMe = await fetch('https://api.github.com/repos/texas000/texas000/readme')
+  const resReadMe = await fetch(process.env.MAIN_REPO_API+'/readme', {headers: {Authorization: `Basic ${gitCredential}`}})
   const readMe = await resReadMe.json()
-  return { github: json, readme: readMe }
+  
+  const resBlog = await fetch(process.env.MAIN_REPO_API+'/contents/blog', {headers: {Authorization: `Basic ${gitCredential}`}})
+  const Blog = await resBlog.json()
+  return { github: json, readme: readMe, blog: Blog }
 }
