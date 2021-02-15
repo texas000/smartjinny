@@ -62,6 +62,9 @@
 		opacity: 1;
 	}
 }
+.handwrite {
+	font-family: "Gochi Hand", cursive;
+}
 
 .title {
 	font-size: 3rem;
