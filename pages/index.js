@@ -21,6 +21,11 @@ export default function Home({ github, readme }) {
 		<div className="container">
 			<Head>
 				<title>Smartjinny</title>
+				<meta
+					name="description"
+					content="smartjinny software developer portfolio website"
+				></meta>
+				<meta name="robots" content="index, follow" />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link

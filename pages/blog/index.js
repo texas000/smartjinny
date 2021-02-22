@@ -1,16 +1,16 @@
-import styles from "../../component/Blog/blog.module.css";
-import marked from "marked";
 import Head from "next/head";
 import Navbar from "../../component/Navbar";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 function Page({ Blog }) {
-	useEffect(() => {
-		console.log(Blog);
-	}, []);
+	const router = useRouter();
 	return (
 		<div className="container">
 			<Head>
 				<title>Blog</title>
+				<meta
+					name="description"
+					content="smartjinny software developer portfolio website"
+				></meta>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -25,21 +25,25 @@ function Page({ Blog }) {
 			>
 				{Blog.map((ga) => (
 					<a
-						href={`/blog/${ga.sha}`}
+						href="#"
+						onClick={() =>
+							router.push({
+								pathname: `/blog/${ga.sha}`,
+								query: { title: ga.name },
+							})
+						}
 						key={ga.sha}
 						className="list-group-item list-group-item-action flex-column align-items-start shadow-sm"
 					>
 						<div className="d-flex w-100 justify-content-between mt-1">
 							<h5>{ga.name}</h5>
 							<div>
-								<a target="_blank" href={ga.download_url}>
-									<img
-										className="mx-2"
-										src="/images/github.svg"
-										width="25"
-										height="25"
-									/>
-								</a>
+								<img
+									className="mx-2"
+									src="/images/github.svg"
+									width="25"
+									height="25"
+								/>
 								<small>{ga.size}B</small>
 							</div>
 						</div>

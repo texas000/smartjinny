@@ -3,13 +3,15 @@ import marked from "marked";
 import Head from "next/head";
 import Navbar from "../../component/Navbar";
 
-function Page({ data }) {
+function Page({ data, Title }) {
 	const a = Buffer.from(data.content, "base64").toString();
 	const content = marked(decodeURIComponent(a));
 	return (
 		<div className="container">
 			<Head>
-				<title>Blog</title>
+				<title>{Title}</title>
+				<meta name="description" content={Title}></meta>
+				<meta name="robots" content="index, follow" />
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -28,15 +30,16 @@ function Page({ data }) {
 }
 
 // This gets called on every request
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, query }) {
 	// console.log(params);
 	// Fetch data from external API
+	// console.log(query);
 	const res = await fetch(
 		`${process.env.MAIN_REPO_API}/git/blobs/${params.id}`
 	);
 	const data = await res.json();
 	// Pass data to the page via props
-	return { props: { data } };
+	return { props: { data, Title: query.title } };
 }
 
 export default Page;
