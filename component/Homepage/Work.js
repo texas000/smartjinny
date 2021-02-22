@@ -1,27 +1,44 @@
-import data from '../../public/data';
+import data from "../../public/data";
+import styles from "./Home.module.css";
 
 const Work = () => {
-    return (
-        <div className="section" id="work">
-        <div className="container">
-          <div className="work-wrapper">
-            <h1>Work</h1>
-            <div className="grid">
-                {data.projects.map(project=> (
-                  <div className="card" key={project.id}>
-                    <div className="card-header">{project.title}</div>
-                    <div className="card-body">
-                      {project.para}
-                      <img src={project.imageSrc}/>
-                      {project.url}
-                    </div>
-                  </div>
-                ))}
-              </div>
-          </div>
-        </div>
-      </div>
-    )
-}
+	return (
+		<div className={`section ${styles.handwrite}`} id="work">
+			<div className="container">
+				<div className="work-wrapper">
+					<h1>Work</h1>
+					<div className="grid">
+						<div className="row">
+							{data.projects.map((project) => (
+								<div className="col-4" key={project.id}>
+									<div className="card border-white my-2">
+										<div className="card-img">
+											<img
+												src={project.imageSrc}
+												className="img-fluid shadow mb-2"
+											/>
+										</div>
+										<div className="card-header bg-transparent">
+											<a target="_blank" href={project.url}>
+												{project.title}
+											</a>
+										</div>
+										<div className="card-body">
+											{/* <img
+												src={project.imageSrc}
+												className="img-fluid shadow mb-2"
+											/> */}
+											{project.para}
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-export default Work
+export default Work;

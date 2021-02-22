@@ -24,8 +24,9 @@ const Header = () => {
 					</p>
 					<div className="text-center">
 						<a
-							href={`mailto:${data.contactEmail}`}
-							className={`btn btn-outline-primary py-3 ${styles.para}`}
+							target="_blank"
+							href={`mailto:${data.contactEmail}?subject=Contacting%20via%20Smartjinny.com`}
+							className={`btn btn-outline-primary py-3 shadow ${styles.para}`}
 						>
 							CONNECT WITH ME
 						</a>

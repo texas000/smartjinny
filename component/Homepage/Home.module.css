@@ -71,6 +71,11 @@
 	font-family: "Faster One", cursive;
 }
 
+.navTitle {
+	font-size: 1.3rem;
+	font-family: "Faster One", cursive;
+}
+
 .headingWrapper {
 	padding: 2rem;
 }

@@ -8,8 +8,9 @@ import Footer from "../component/Homepage/Footer";
 import React, { useState } from "react";
 import marked from "marked";
 import { useRouter } from "next/router";
+import Navbar from "../component/Navbar";
 
-export default function Home({ github, readme, blog }) {
+export default function Home({ github, readme }) {
 	const router = useRouter();
 	const [content, setContent] = useState(false);
 
@@ -27,13 +28,10 @@ export default function Home({ github, readme, blog }) {
 					rel="stylesheet"
 				/>
 			</Head>
+			<Navbar />
 			<Header />
 			<About readme={content} />
-			{blog.map((ga) => (
-				<a href={`/blog/${ga.sha}`} key={ga.sha}>
-					<p>{ga.name}</p>
-				</a>
-			))}
+
 			<Work />
 			<Skills />
 			{/* <Footer/> */}
@@ -65,9 +63,5 @@ Home.getInitialProps = async (ctx) => {
 	});
 	const readMe = await resReadMe.json();
 
-	const resBlog = await fetch(process.env.MAIN_REPO_API + "/contents/blog", {
-		headers: { Authorization: `Basic ${gitCredential}` },
-	});
-	const Blog = await resBlog.json();
-	return { github: json, readme: readMe, blog: Blog };
+	return { github: json, readme: readMe };
 };
