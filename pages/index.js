@@ -23,9 +23,14 @@ export default function Home({ github, readme }) {
 				<title>Smartjinny</title>
 				<meta
 					name="description"
-					content="smartjinny software developer portfolio website"
+					content="Smartjinny, Professional Software Developer Portfolio Website"
 				></meta>
 				<meta name="robots" content="index, follow" />
+				<meta property="og:title" content="Smartjinny"></meta>
+				<meta property="og:url" content="https://smartjinny.com"></meta>
+				<meta property="og:image" content="https://smartjinny.com/images/smartjinny.png"></meta>
+				<meta property="og:description" content="Smartjinny, Professional Software Developer Portfolio Website"></meta>
+				<meta name="og:description" content="Smartjinny, Professional Software Developer Portfolio Website"></meta>
 				<link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
@@ -39,7 +44,7 @@ export default function Home({ github, readme }) {
 
 			<Work />
 			<Skills />
-			{/* <Footer/> */}
+			<Footer/>
 			<style jsx global>{`
 				html,
 				body {

@@ -161,10 +161,6 @@ export default {
 		// Add Or Remove The Link Accordingly
 		{ img: "/images/github.svg", url: "https://github.com/texas000" },
 		{
-			img: "/images/codepen.svg",
-			url: "https://www.codepen.com/",
-		},
-		{
 			img: "/images/instagram.svg",
 			url: "https://www.instagram.com/smartjinny",
 		},

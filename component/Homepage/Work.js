@@ -10,7 +10,7 @@ const Work = () => {
 					<div className="grid">
 						<div className="row">
 							{data.projects.map((project) => (
-								<div className="col-4" key={project.id}>
+								<div className="col-lg-4 text-center" key={project.id}>
 									<div className="card border-white my-2">
 										<div className="card-img">
 											<img
@@ -23,7 +23,7 @@ const Work = () => {
 												{project.title}
 											</a>
 										</div>
-										<div className="card-body">
+										<div className="card-body text-left">
 											{/* <img
 												src={project.imageSrc}
 												className="img-fluid shadow mb-2"
