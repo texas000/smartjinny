@@ -5,7 +5,7 @@ import Navbar from "../../component/Navbar";
 
 function Page({ data, Title }) {
 	const a = Buffer.from(data.content, "base64").toString();
-	const content = marked(decodeURIComponent(a));
+	const content = marked(a);
 	return (
 		<div className="container">
 			<Head>
@@ -25,7 +25,6 @@ function Page({ data, Title }) {
 				<article dangerouslySetInnerHTML={{ __html: content }}></article>
 			</div>
 		</div>
-		// <p>{JSON.stringify(data)}</p>
 	);
 }
 
