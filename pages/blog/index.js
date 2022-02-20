@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Navbar from "../../component/Navbar";
+// import Navbar from "../../component/Navbar";
 import { useRouter } from "next/router";
 function Page({ Blog }) {
 	const router = useRouter();
@@ -18,7 +18,7 @@ function Page({ Blog }) {
 					rel="stylesheet"
 				/>
 			</Head>
-			<Navbar />
+			{/* <Navbar />
 			<div
 				className="list-group mt-4 shadow"
 				style={{ fontFamily: "Gochi Hand" }}
@@ -49,7 +49,7 @@ function Page({ Blog }) {
 						</div>
 					</a>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }
@@ -66,6 +66,7 @@ export async function getServerSideProps({ params }) {
 		headers: { Authorization: `Basic ${gitCredential}` },
 	});
 	var Blog = await resBlog.json();
+	console.log(Blog);
 	if (typeof Blog === "object") Blog.reverse();
 	// Pass data to the page via props
 	return { props: { Blog } };

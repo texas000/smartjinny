@@ -1,7 +1,7 @@
 import styles from "../../component/Blog/blog.module.css";
 import marked from "marked";
 import Head from "next/head";
-import Navbar from "../../component/Navbar";
+// import Navbar from "../../component/Navbar";
 
 function Page({ data, Title }) {
 	const a = Buffer.from(data.content, "base64").toString();
@@ -19,11 +19,11 @@ function Page({ data, Title }) {
 					rel="stylesheet"
 				/>
 			</Head>
-			<Navbar />
+			{/* <Navbar />
 			<div className={styles.contents + " container my-4 py-4 shadow-sm"}>
 				<p className="text-right">{data.size} bytes of reading</p>
 				<article dangerouslySetInnerHTML={{ __html: content }}></article>
-			</div>
+			</div> */}
 		</div>
 	);
 }
