@@ -1,22 +1,11 @@
-import Head from "next/head";
-
-// import data from "../public/data";
-// import Header from "../component/Homepage/Header";
-// import About from "../component/Homepage/About";
-// import Work from "../component/Homepage/Work";
-// import Skills from "../component/Homepage/Skills";
-// import Footer from "../component/Homepage/Footer";
 import React, { Fragment, useState } from "react";
-import marked from "marked";
 import { useRouter } from "next/router";
 import Page from "../component/Page";
-// import Navbar from "../component/Navbar";
 
 export default function Home({}) {
 	const router = useRouter();
-
 	return (
-		<Page>
+		<Page title="Home">
 			{/* <!-- ====== Hero Section Start --> */}
 			<div
 				id="home"

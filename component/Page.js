@@ -1,11 +1,11 @@
 import Header from "./Header";
 import Head from "next/head";
-
-export default function Page(props) {
+import { Fragment } from "react";
+export default function Page({ children, title }) {
 	return (
-		<div>
+		<Fragment>
 			<Head>
-				<title>{props.title || "Smartjinny"}</title>
+				<title>{title || "Smartjinny"}</title>
 				<meta
 					name="description"
 					content="Smartjinny, Professional Software Developer Portfolio Website"
@@ -26,9 +26,9 @@ export default function Page(props) {
 				></meta>
 				<link rel="icon" href="/assets/images/favicon.png" />
 			</Head>
-			<Header />
 
-			{props.children}
-		</div>
+			<Header />
+			{children}
+		</Fragment>
 	);
 }
