@@ -5,7 +5,7 @@ export default async (req, res) => {
 
 	const post = await db
 		.collection("blog")
-		.find({ private: false }, { markdown: 0 })
+		.find({ private: false }, { projection: { markdown: 0 } })
 		.toArray();
 
 	res.json(post);
