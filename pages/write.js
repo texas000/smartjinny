@@ -43,9 +43,7 @@ export default function Write() {
 				className="
         relative
         z-10
-        pt-[120px]
-        md:pt-[130px]
-        lg:pt-[160px]
+        pt-[20px]
         pb-[50px]
         bg-primary
         overflow-hidden
@@ -137,7 +135,7 @@ export default function Write() {
 					</span>
 				</div>
 			</div>
-			<div className="p-2 bg-gray-50">
+			<div className="p-2 bg-gray-50 h-max">
 				{Editor && (
 					<Editor
 						editorState={editorState}

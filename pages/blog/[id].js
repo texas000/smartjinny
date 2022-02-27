@@ -41,7 +41,10 @@ export default function Post() {
 	if (!data) return <div>loading...</div>;
 
 	return (
-		<Page title="BLOG">
+		<Page
+			title={data.title}
+			description={post.getCurrentContent().getBlockMap().first().getText()}
+		>
 			<div
 				className="
         relative
@@ -61,7 +64,7 @@ export default function Post() {
 								{token ? (
 									<input
 										type="text"
-										className="bg-transparent font-semibold text-white text-4xl text-center"
+										className="w-full bg-transparent font-semibold text-white text-4xl text-center"
 										value={title}
 										onChange={(e) => {
 											e.preventDefault();
