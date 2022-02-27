@@ -1,36 +1,34 @@
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
-import { convertFromRaw, EditorState } from "draft-js";
+import { convertFromRaw, EditorState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Page from "../../component/Page";
-
-const Post = () => {
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import useSWR from "swr";
+export default function Post() {
 	const router = useRouter();
 
-	useEffect(() => {
-		fetchPost();
-	}, []);
+	const fetcher = (url) => fetch(url).then((r) => r.json());
+	const { data, error } = useSWR(
+		`/api/blog/getPost?id=${router.query.id}`,
+		fetcher
+	);
 	const [post, setPost] = useState(EditorState.createEmpty());
-	const [detail, setDetail] = useState(false);
+	const [title, setTitle] = useState(false);
 
-	async function fetchPost() {
-		if (router.query.id != undefined) {
-			const getPost = await fetch(`/api/blog/getPost?id=${router.query.id}`);
-			if (getPost.ok) {
-				const postRes = await getPost.json();
-				const contentBlock = convertFromRaw(JSON.parse(postRes.markdown));
-				const editorState = EditorState.createWithContent(contentBlock);
-				setPost(editorState);
-				setDetail(postRes);
-				// const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-				// const editorState = EditorState.createWithContent(contentBlock);
-				// setPost(convertFromRaw(JSON.parse(postRes.markdown)));
-			} else {
-				alert(getPost.status);
-			}
+	const raw = Cookies.get("user_session");
+	const token = jwt.decode(raw);
+
+	useEffect(() => {
+		if (data) {
+			const contentBlock = convertFromRaw(JSON.parse(data?.markdown));
+			const editorState = EditorState.createWithContent(contentBlock);
+			setPost(editorState);
+			setTitle(data.title);
 		}
-	}
+	}, [data]);
 
 	const Editor = useMemo(() => {
 		return dynamic(
@@ -38,6 +36,9 @@ const Post = () => {
 			{ ssr: false }
 		);
 	}, []);
+
+	if (error) return <div>failed to load</div>;
+	if (!data) return <div>loading...</div>;
 
 	return (
 		<Page title="BLOG">
@@ -57,9 +58,34 @@ const Post = () => {
 					<div className="flex flex-wrap items-center -mx-4">
 						<div className="w-full px-4">
 							<div className="text-center">
-								<h1 className="font-semibold text-white text-4xl">
-									{detail?.title}
-								</h1>
+								<input
+									type="text"
+									className="bg-transparent font-semibold text-white text-4xl text-center"
+									disabled={!token}
+									value={title}
+									onChange={(e) => {
+										e.preventDefault();
+										setTitle(e.target.value);
+									}}
+								></input>
+								{token && (
+									<button
+										onClick={() => {
+											fetch("/api/blog/updatePost", {
+												method: "POST",
+												body: JSON.stringify({
+													id: data._id,
+													title: title,
+													markdown: JSON.stringify(
+														convertToRaw(post.getCurrentContent())
+													),
+												}),
+											});
+										}}
+									>
+										Push
+									</button>
+								)}
 							</div>
 						</div>
 					</div>
@@ -134,22 +160,20 @@ const Post = () => {
 				Post: {router.query.id}
 			</h1> */}
 
-			<div className="readonly">
+			<div className="readonly px-1">
 				{Editor && (
 					<Editor
 						editorState={post}
 						toolbarClassName="border-2"
-						toolbarHidden
+						toolbarHidden={!token}
 						// toolbarClassName="bg-black"
 						// wrapperClassName="hidden"
 						// editorClassName="hidden"
-						readOnly={true}
+						onEditorStateChange={setPost}
+						readOnly={!token}
 					/>
 				)}
 			</div>
-			{/* {JSON.stringify(post)} */}
 		</Page>
 	);
-};
-
-export default Post;
+}

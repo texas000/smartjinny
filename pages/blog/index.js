@@ -1,10 +1,22 @@
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Page from "../../component/Page";
-const Post = () => {
+
+export async function getServerSideProps({ req }) {
+	return {
+		props: {},
+	};
+}
+
+const Post = (props) => {
 	const [data, setData] = useState(false);
 	useEffect(() => {
 		getData();
+		const raw = Cookies.get("user_session");
+		const token = jwt.decode(raw);
+		// console.log(token);
 	}, []);
 	async function getData() {
 		const getPosts = await fetch("/api/blog/getPosts");
@@ -137,6 +149,14 @@ const Post = () => {
 							src="/images/smartjinny.jpg"
 							alt=""
 						/>
+						<button
+							onClick={() =>
+								fetch(`/api/blog/deletePost?id=${ga._id}`).then(() => getData())
+							}
+							className="absolute right-0 top-0 mt-5"
+						>
+							Delete
+						</button>
 					</blockquote>
 				))}
 				{/* <ul key={ga._id} className="text-2xl">
@@ -157,4 +177,5 @@ const Post = () => {
 		</Page>
 	);
 };
+
 export default Post;

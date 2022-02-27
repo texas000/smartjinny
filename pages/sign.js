@@ -1,6 +1,38 @@
 import Page from "../component/Page";
+import Cookie from "js-cookie";
+import * as gtag from "../gtag";
+import { useRouter } from "next/router";
 
 export default function Home() {
+	const router = useRouter();
+	async function handleSignSubmit(e) {
+		e.preventDefault();
+		const sign = await fetch("/api/login", {
+			method: "POST",
+			body: JSON.stringify({
+				username: e.target[0].value,
+				password: e.target[1].value,
+			}),
+		});
+		const res = await sign.json();
+		if (res.token) {
+			Cookie.set("user_session", res.token);
+			gtag.event({
+				action: "login_attempt",
+				category: "Login",
+				label: "success",
+			});
+			router.push("/");
+		} else {
+			gtag.event({
+				action: "login_attempt",
+				category: "Login",
+				label: "failed",
+			});
+			alert("WRONG PASSWORD");
+		}
+	}
+
 	return (
 		<Page>
 			{/* <!-- ====== Banner Section Start --> */}
@@ -123,11 +155,11 @@ export default function Home() {
 										<img src="assets/images/logo/logo.svg" alt="logo" />
 									</a>
 								</div>
-								<form>
+								<form onSubmit={handleSignSubmit}>
 									<div className="mb-6">
 										<input
-											type="email"
-											placeholder="Email"
+											type="text"
+											placeholder="Username"
 											className="
                       w-full
                       rounded-md
