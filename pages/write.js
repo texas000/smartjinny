@@ -31,6 +31,7 @@ export default function Write() {
 		});
 		if (addPost.ok) {
 			setEditorState(EditorState.createEmpty());
+
 			router.push("/blog");
 		} else {
 			alert(addPost.status);

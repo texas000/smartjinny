@@ -1,6 +1,9 @@
 export default function LoadingPage() {
 	return (
-		<div id="loading-screen" className="grid place-items-center h-screen">
+		<div
+			id="loading-screen"
+			className="flex justify-center items-center h-screen"
+		>
 			<svg
 				className="animate-spin -ml-1 mr-3 h-10 w-10 text-indigo-500"
 				xmlns="http://www.w3.org/2000/svg"
