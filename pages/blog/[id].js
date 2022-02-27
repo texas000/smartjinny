@@ -58,20 +58,23 @@ export default function Post() {
 					<div className="flex flex-wrap items-center -mx-4">
 						<div className="w-full px-4">
 							<div className="text-center">
-								<input
-									type="text"
-									className="bg-transparent font-semibold text-white text-4xl text-center"
-									disabled={!token}
-									value={title}
-									onChange={(e) => {
-										e.preventDefault();
-										setTitle(e.target.value);
-									}}
-								></input>
+								{token ? (
+									<input
+										type="text"
+										className="bg-transparent font-semibold text-white text-4xl text-center"
+										value={title}
+										onChange={(e) => {
+											e.preventDefault();
+											setTitle(e.target.value);
+										}}
+									></input>
+								) : (
+									<h1 className="font-bold text-white text-4xl">{title}</h1>
+								)}
 								{token && (
-									<div>
+									<div className="my-2">
 										<button
-											className="bg-white text-gray-500 rounded p-1 mr-2"
+											className="font-semibold rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-700 px-5 py-2 mr-2"
 											onClick={() => {
 												fetch("/api/blog/updatePost", {
 													method: "POST",
@@ -88,7 +91,7 @@ export default function Post() {
 											Push
 										</button>
 										<button
-											className="bg-white text-red-500 rounded p-1"
+											className="font-semibold rounded-md bg-red-200 hover:bg-red-300 text-red-700 px-5 py-2"
 											onClick={() => {
 												fetch(`/api/blog/deletePost?id=${data._id}`).then(
 													() => {

@@ -2,14 +2,14 @@ import { connectToDatabase } from "../../../mongo";
 
 export default async (req, res) => {
 	const { db } = await connectToDatabase();
-	// console.log(req.body);
-	const movies = await db.collection("blog").insertOne({
-		title: "hello world",
+	const body = JSON.parse(req.body);
+	const post = await db.collection("blog").insertOne({
+		title: body.title,
 		private: false,
-		markdown: req.body,
+		markdown: body.markdown,
 		created: new Date(),
 		comment: [],
 	});
 
-	res.json(movies);
+	res.json(post);
 };

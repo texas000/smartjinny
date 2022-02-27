@@ -6,6 +6,7 @@ export default async (req, res) => {
 	const post = await db
 		.collection("blog")
 		.find({ private: false }, { projection: { markdown: 0 } })
+		.sort({ created: -1 })
 		.toArray();
 
 	res.json(post);

@@ -16,7 +16,6 @@ const Post = (props) => {
 		getData();
 		const raw = Cookies.get("user_session");
 		const token = jwt.decode(raw);
-		// console.log(token);
 	}, []);
 	async function getData() {
 		const getPosts = await fetch("/api/blog/getPosts");
@@ -120,7 +119,7 @@ const Post = (props) => {
 				{data.map((ga) => (
 					<blockquote
 						key={ga._id}
-						className="flex items-center justify-between w-full col-span-1 p-6 bg-white rounded-lg shadow mb-2 hover:bg-gray-100 cursor-pointer"
+						className="flex items-center justify-between w-full col-span-1 px-6 py-2 bg-white rounded-lg shadow mb-2 hover:bg-gray-100 cursor-pointer"
 						onClick={() => router.push(`/blog/${ga._id}`)}
 					>
 						<div className="flex flex-col pr-8">

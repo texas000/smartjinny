@@ -6,7 +6,6 @@ export default async (req, res) => {
 	const body = JSON.parse(req.body);
 
 	var ObjectId = require("mongodb").ObjectId;
-	console.log(body);
 	const post = await db.collection("blog").updateOne(
 		{ _id: ObjectId(body.id) },
 		{

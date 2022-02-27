@@ -3,7 +3,14 @@ import { EditorState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useMemo, useState } from "react";
 import Page from "../component/Page";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import { useRouter } from "next/router";
 export default function Write() {
+	const router = useRouter();
+	const raw = Cookies.get("user_session");
+	const token = jwt.decode(raw);
+
 	const Editor = useMemo(() => {
 		return dynamic(
 			() => import("react-draft-wysiwyg").then((mod) => mod.Editor),
@@ -12,22 +19,24 @@ export default function Write() {
 	}, []);
 
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
-	const [submit, setSubmit] = useState(false);
+	const [title, setTitle] = useState("");
 
 	async function Post() {
 		const addPost = await fetch("/api/blog/addPost", {
 			method: "POST",
-			body: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+			body: JSON.stringify({
+				title: title,
+				markdown: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+			}),
 		});
-		const addPostRes = await addPost.json();
 		if (addPost.ok) {
 			setEditorState(EditorState.createEmpty());
+			router.push("/blog");
 		} else {
 			alert(addPost.status);
 		}
-		// console.log(addPostRes);
 	}
-
+	if (!token) return <div>Invalid Access</div>;
 	return (
 		<Page>
 			<div
@@ -44,10 +53,21 @@ export default function Write() {
 			>
 				<div className="container">
 					<div className="flex flex-wrap items-center -mx-4">
-						<div className="w-full px-4">
+						<div className="w-full px-4 flex flex-col gap-5">
 							<div className="text-center">
-								<h1 className="font-semibold text-white text-4xl">Write</h1>
+								<input
+									className="bg-transparent font-semibold text-white text-4xl text-center placeholder-slate-400 border-2 border-gray-100 rounded"
+									defaultValue="title..."
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
+								></input>
 							</div>
+							<button
+								className="font-semibold rounded-md bg-indigo-200 hover:bg-indigo-300 text-indigo-700 px-5 py-2 mr-2"
+								onClick={Post}
+							>
+								Submit
+							</button>
 						</div>
 					</div>
 				</div>
@@ -127,12 +147,6 @@ export default function Write() {
 						onEditorStateChange={setEditorState}
 					/>
 				)}
-				<button
-					className="bg-sky-600 hover:bg-sky-700 rounded-full text-white p-3 m-2 font-semibold"
-					onClick={Post}
-				>
-					Submit
-				</button>
 			</div>
 		</Page>
 	);
