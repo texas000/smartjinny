@@ -69,22 +69,37 @@ export default function Post() {
 									}}
 								></input>
 								{token && (
-									<button
-										onClick={() => {
-											fetch("/api/blog/updatePost", {
-												method: "POST",
-												body: JSON.stringify({
-													id: data._id,
-													title: title,
-													markdown: JSON.stringify(
-														convertToRaw(post.getCurrentContent())
-													),
-												}),
-											});
-										}}
-									>
-										Push
-									</button>
+									<div>
+										<button
+											className="bg-white text-gray-500 rounded p-1 mr-2"
+											onClick={() => {
+												fetch("/api/blog/updatePost", {
+													method: "POST",
+													body: JSON.stringify({
+														id: data._id,
+														title: title,
+														markdown: JSON.stringify(
+															convertToRaw(post.getCurrentContent())
+														),
+													}),
+												});
+											}}
+										>
+											Push
+										</button>
+										<button
+											className="bg-white text-red-500 rounded p-1"
+											onClick={() => {
+												fetch(`/api/blog/deletePost?id=${data._id}`).then(
+													() => {
+														router.push("/blog");
+													}
+												);
+											}}
+										>
+											Delete
+										</button>
+									</div>
 								)}
 							</div>
 						</div>
