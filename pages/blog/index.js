@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Page from "../../component/Page";
-
+import LoadingPage from "../../component/LoadingPage";
 export async function getServerSideProps({ req }) {
 	return {
 		props: {},
@@ -24,7 +24,7 @@ const Post = (props) => {
 			setData(postRes);
 		}
 	}
-	if (!data) return <div>loading...</div>;
+	if (!data) return <LoadingPage />;
 	const router = useRouter();
 	return (
 		<Page>
