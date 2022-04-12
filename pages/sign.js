@@ -22,7 +22,7 @@ export default function Home() {
 				category: "Login",
 				label: "success",
 			});
-			router.push("/");
+			router.push("/write");
 		} else {
 			gtag.event({
 				action: "login_attempt",

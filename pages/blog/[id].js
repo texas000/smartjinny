@@ -93,7 +93,7 @@ export default function Post() {
 															convertToRaw(post.getCurrentContent())
 														),
 													}),
-												}).then(() => setLoading(false));
+												}).then(() => setLoading(false), router.push("/blog"));
 											}}
 										>
 											{isLoading && (

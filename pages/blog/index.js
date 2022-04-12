@@ -12,10 +12,12 @@ export async function getServerSideProps({ req }) {
 
 const Post = (props) => {
 	const [data, setData] = useState(false);
+	const [admin, setAdmin] = useState(false);
 	useEffect(() => {
 		getData();
 		const raw = Cookies.get("user_session");
 		const token = jwt.decode(raw);
+		setAdmin(token);
 	}, []);
 	async function getData() {
 		const getPosts = await fetch("/api/blog/getPosts");
@@ -158,20 +160,14 @@ const Post = (props) => {
 						</button>
 					</blockquote>
 				))}
-				{/* <ul key={ga._id} className="text-2xl">
-						<li onClick={() => router.push(`/blog/${ga._id}`)}>{ga.title}</li>
-						<li>
-							<button
-								onClick={() =>
-									fetch(`/api/blog/deletePost?id=${ga._id}`).then(() =>
-										getData()
-									)
-								}
-							>
-								Delete
-							</button>
-						</li>
-					</ul> */}
+				{admin && (
+					<a
+						className="flex bg-secondary text-white rounded-xl p-2 m-4 w-20 items-center justify-center"
+						href="/write"
+					>
+						Write
+					</a>
+				)}
 			</div>
 		</Page>
 	);

@@ -39,7 +39,7 @@ export default function Home({}) {
 				  uppercase
                 "
 								>
-									Smartjinny webpage is under construction
+									Smartjinny
 								</h1>
 								<p
 									className="
@@ -52,13 +52,12 @@ export default function Home({}) {
                   max-w-[600px]
                 "
 								>
-									Multidisciplinary Web Template Built with Your Favourite
-									Technology - HTML Bootstrap, Tailwind and React NextJS.
+									Buidling Customized ERP Solution for your Business
 								</p>
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
 										<a
-											href="https://links.tailgrids.com/play-download"
+											href="/contact"
 											className="
                       py-4
                       px-6
@@ -76,13 +75,12 @@ export default function Home({}) {
                       ease-in-out
                     "
 										>
-											Download Now
+											Contact Us
 										</a>
 									</li>
 									<li>
 										<a
-											href="https://github.com/tailgrids/play-tailwind"
-											target="_blank"
+											href="/blog"
 											className="
                       text-base
                       font-medium
@@ -98,7 +96,7 @@ export default function Home({}) {
                       ease-in-out
                     "
 										>
-											Star on Github
+											Blog
 											<span className="pl-2">
 												<svg
 													width="20"
@@ -138,7 +136,7 @@ export default function Home({}) {
 							>
 								<div className="mt-16">
 									<img
-										src="assets/images/hero/hero-image.jpg"
+										src="assets/images/hero/hero-image.png"
 										alt="hero"
 										className="max-w-full mx-auto rounded-t-xl rounded-tr-xl"
 									/>
@@ -2575,6 +2573,12 @@ export default function Home({}) {
 				</div>
 			</section>
 			{/* <!-- ====== Faq Section End --> */}
+			<a
+				className="flex bg-secondary text-white rounded-xl p-2 m-4 w-20 items-center justify-center"
+				href="/sign"
+			>
+				Sign In
+			</a>
 		</Page>
 	);
 }
