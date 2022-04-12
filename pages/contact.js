@@ -10,21 +10,34 @@ export default class Contact extends Component {
 		this.setState({ message: e.target.value });
 	};
 
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault();
 
-		gtag.event({
-			action: "submit_form",
-			category: "Contact",
-			label: this.state.message,
-		});
+		await fetch("/api/contact/sendGrid", {
+			method: "POST",
+			body: JSON.stringify({
+				email: e.target[0].value,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				alert(data.message);
+			});
 
-		this.setState({ message: "" });
+		// gtag.event({
+		// 	action: "submit_form",
+		// 	category: "Contact",
+		// 	label: this.state.message,
+		// });
+
+		// this.setState({ message: "" });
 	};
 
 	render() {
 		return (
 			<Page>
+				{/* <!-- ====== Banner Section Start --> */}
 				<div
 					className="
         relative
@@ -41,7 +54,9 @@ export default class Contact extends Component {
 						<div className="flex flex-wrap items-center -mx-4">
 							<div className="w-full px-4">
 								<div className="text-center">
-									<h1 className="font-semibold text-white text-4xl">Contact</h1>
+									<h1 className="font-semibold text-white text-4xl">
+										Contact Us
+									</h1>
 								</div>
 							</div>
 						</div>
@@ -112,13 +127,330 @@ export default class Contact extends Component {
 						</span>
 					</div>
 				</div>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						<span>Message:</span>
-						<textarea onChange={this.handleInput} value={this.state.message} />
-					</label>
-					<button type="submit">submit</button>
-				</form>
+				{/* <!-- ====== Banner Section End --> */}
+
+				{/* <!-- ====== Forms Section Start --> */}
+				<section className="bg-[#F4F7FF] py-10 lg:py-10">
+					<div className="container">
+						<div className="flex flex-wrap -mx-4">
+							<div className="w-full px-4">
+								<div
+									className="
+                max-w-[525px]
+                mx-auto
+                text-center
+                bg-white
+                rounded-lg
+                relative
+                overflow-hidden
+                py-14
+                px-8
+                sm:px-12
+                md:px-[60px]
+                wow
+                fadeInUp
+              "
+									data-wow-delay=".15s"
+								>
+									<div className="mb-10 text-center">
+										Please fill out your email and message, We will contact you
+										shortly.
+										{/* <a href="#" className="inline-block max-w-[160px] mx-auto">
+											<img src="assets/images/logo/logo.svg" alt="logo" />
+										</a> */}
+									</div>
+
+									<form onSubmit={this.handleSubmit}>
+										<div className="mb-6">
+											<input
+												id="email"
+												type="email"
+												placeholder="Email"
+												className="
+                      w-full
+                      rounded-md
+                      border
+                      bordder-[#E9EDF4]
+                      py-3
+                      px-5
+                      bg-[#FCFDFE]
+                      text-base text-body-color
+                      placeholder-[#ACB6BE]
+                      outline-none
+                      focus-visible:shadow-none
+                      focus:border-primary
+                      transition
+                    "
+											/>
+										</div>
+										<div className="mb-6">
+											<textarea
+												type="message"
+												placeholder="Message"
+												className="
+                      w-full
+                      rounded-md
+                      border
+                      bordder-[#E9EDF4]
+                      py-3
+                      px-5
+                      bg-[#FCFDFE]
+                      text-base text-body-color
+                      placeholder-[#ACB6BE]
+                      outline-none
+                      focus-visible:shadow-none
+                      focus:border-primary
+                      transition
+                    "
+											/>
+										</div>
+										<div className="mb-10">
+											<input
+												type="submit"
+												value="Submit"
+												className="
+                      w-full
+                      rounded-md
+                      border
+                      bordder-primary
+                      py-3
+                      px-5
+                      bg-primary
+                      text-base text-white
+                      cursor-pointer
+                      hover:shadow-md
+                      transition
+                      duration-300
+                      ease-in-out
+                    "
+											/>
+										</div>
+									</form>
+
+									<div>
+										<span className="absolute top-1 right-1">
+											<svg
+												width="40"
+												height="40"
+												viewBox="0 0 40 40"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<circle
+													cx="1.39737"
+													cy="38.6026"
+													r="1.39737"
+													transform="rotate(-90 1.39737 38.6026)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="1.39737"
+													cy="1.99122"
+													r="1.39737"
+													transform="rotate(-90 1.39737 1.99122)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="13.6943"
+													cy="38.6026"
+													r="1.39737"
+													transform="rotate(-90 13.6943 38.6026)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="13.6943"
+													cy="1.99122"
+													r="1.39737"
+													transform="rotate(-90 13.6943 1.99122)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="25.9911"
+													cy="38.6026"
+													r="1.39737"
+													transform="rotate(-90 25.9911 38.6026)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="25.9911"
+													cy="1.99122"
+													r="1.39737"
+													transform="rotate(-90 25.9911 1.99122)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="38.288"
+													cy="38.6026"
+													r="1.39737"
+													transform="rotate(-90 38.288 38.6026)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="38.288"
+													cy="1.99122"
+													r="1.39737"
+													transform="rotate(-90 38.288 1.99122)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="1.39737"
+													cy="26.3057"
+													r="1.39737"
+													transform="rotate(-90 1.39737 26.3057)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="13.6943"
+													cy="26.3057"
+													r="1.39737"
+													transform="rotate(-90 13.6943 26.3057)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="25.9911"
+													cy="26.3057"
+													r="1.39737"
+													transform="rotate(-90 25.9911 26.3057)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="38.288"
+													cy="26.3057"
+													r="1.39737"
+													transform="rotate(-90 38.288 26.3057)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="1.39737"
+													cy="14.0086"
+													r="1.39737"
+													transform="rotate(-90 1.39737 14.0086)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="13.6943"
+													cy="14.0086"
+													r="1.39737"
+													transform="rotate(-90 13.6943 14.0086)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="25.9911"
+													cy="14.0086"
+													r="1.39737"
+													transform="rotate(-90 25.9911 14.0086)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="38.288"
+													cy="14.0086"
+													r="1.39737"
+													transform="rotate(-90 38.288 14.0086)"
+													fill="#3056D3"
+												/>
+											</svg>
+										</span>
+										<span className="absolute left-1 bottom-1">
+											<svg
+												width="29"
+												height="40"
+												viewBox="0 0 29 40"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<circle
+													cx="2.288"
+													cy="25.9912"
+													r="1.39737"
+													transform="rotate(-90 2.288 25.9912)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="14.5849"
+													cy="25.9911"
+													r="1.39737"
+													transform="rotate(-90 14.5849 25.9911)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="26.7216"
+													cy="25.9911"
+													r="1.39737"
+													transform="rotate(-90 26.7216 25.9911)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="2.288"
+													cy="13.6944"
+													r="1.39737"
+													transform="rotate(-90 2.288 13.6944)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="14.5849"
+													cy="13.6943"
+													r="1.39737"
+													transform="rotate(-90 14.5849 13.6943)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="26.7216"
+													cy="13.6943"
+													r="1.39737"
+													transform="rotate(-90 26.7216 13.6943)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="2.288"
+													cy="38.0087"
+													r="1.39737"
+													transform="rotate(-90 2.288 38.0087)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="2.288"
+													cy="1.39739"
+													r="1.39737"
+													transform="rotate(-90 2.288 1.39739)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="14.5849"
+													cy="38.0089"
+													r="1.39737"
+													transform="rotate(-90 14.5849 38.0089)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="26.7216"
+													cy="38.0089"
+													r="1.39737"
+													transform="rotate(-90 26.7216 38.0089)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="14.5849"
+													cy="1.39761"
+													r="1.39737"
+													transform="rotate(-90 14.5849 1.39761)"
+													fill="#3056D3"
+												/>
+												<circle
+													cx="26.7216"
+													cy="1.39761"
+													r="1.39737"
+													transform="rotate(-90 26.7216 1.39761)"
+													fill="#3056D3"
+												/>
+											</svg>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				{/* <!-- ====== Forms Section End --> */}
 			</Page>
 		);
 	}

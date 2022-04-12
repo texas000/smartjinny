@@ -18,11 +18,11 @@ const App = ({ Component, pageProps }) => {
 
 	return (
 		<>
-			<Script
+			{/* <Script
 				async
 				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9447262125327502"
 				crossorigin="anonymous"
-			/>
+			/> */}
 			{/* Global Site Tag (gtag.js) - Google Analytics */}
 			<Script
 				strategy="afterInteractive"
