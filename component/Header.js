@@ -321,7 +321,7 @@ export default function Header() {
 								</ul>
 							</nav>
 						</div>
-						<div className="sm:flex justify-end pr-16 lg:pr-0">
+						<div className="sm:flex justify-end pr-16 lg:pr-0 my-1">
 							<a
 								href="/blog"
 								className="
@@ -331,6 +331,7 @@ export default function Header() {
                   bg-white bg-opacity-20
                   rounded-lg
                   py-3
+                  lg:py-2
                   px-6
                   hover:bg-opacity-100 hover:text-dark
                   signUpBtn

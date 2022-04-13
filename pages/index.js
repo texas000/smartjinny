@@ -52,7 +52,7 @@ export default function Home({}) {
                   max-w-[600px]
                 "
 								>
-									Buidling Customized ERP Solution for your Business
+									Building Customized GERP Solution for your Business
 								</p>
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
@@ -1307,7 +1307,7 @@ export default function Home({}) {
                   mb-4
                 "
 								>
-									Main Features Of Play
+									Main Features Of GERP
 								</h2>
 								<p
 									className="
@@ -1376,10 +1376,15 @@ export default function Home({}) {
 										/>
 									</svg>
 								</div>
-								<h4 className="font-bold text-xl text-dark mb-3">eCommerce</h4>
+								<h4 className="font-bold text-xl text-dark mb-3">
+									Approval System
+								</h4>
 								<p className="text-body-color mb-8 lg:mb-11">
-									Professional eCommerce solutions
+									Professional approval solutions
+									<br />
+									(전자 결재 시스템)
 								</p>
+
 								<a
 									href="#"
 									className="font-medium text-base text-body-color hover:text-primary"
@@ -1440,7 +1445,7 @@ export default function Home({}) {
 									</svg>
 								</div>
 								<h4 className="font-bold text-xl text-dark mb-3">
-									Enterprise Resource Planning
+									Customizable Solution
 								</h4>
 								<p className="text-body-color mb-8 lg:mb-11">
 									Enhance Customer Relationship Management
