@@ -5,7 +5,7 @@ import Page from "../component/Page";
 export default function Home({ data }) {
 	const router = useRouter();
 	return (
-		<Page title="Home">
+		<Page title={data.data?.attributes?.hero?.title || "SMARTJINNY"}>
 			{/* <!-- ====== Hero Section Start --> */}
 			<div
 				id="home"
@@ -39,7 +39,7 @@ export default function Home({ data }) {
 				  uppercase
                 "
 								>
-									Smartjinny
+									{data.data?.attributes?.hero?.heading1 || "SMARTJINNY"}
 								</h1>
 								<p
 									className="
@@ -52,7 +52,8 @@ export default function Home({ data }) {
                   max-w-[600px]
                 "
 								>
-									Building Customized GERP Solution for your Business
+									{data.data?.attributes?.hero?.headingDescription ||
+										"Description"}
 								</p>
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
