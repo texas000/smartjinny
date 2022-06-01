@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import Page from "../component/Page";
 
-export default function Home({}) {
+export default function Home({ data }) {
 	const router = useRouter();
 	return (
 		<Page title="Home">
@@ -2584,6 +2584,17 @@ export default function Home({}) {
 			>
 				Sign In
 			</a>
+			{JSON.stringify(data)}
 		</Page>
 	);
+}
+
+// This gets called on every request
+export async function getServerSideProps() {
+	// Fetch data from external API
+	const res = await fetch(`${process.env.BASE_URL}/api/home`);
+	const data = await res.json();
+
+	// Pass data to the page via props
+	return { props: { data } };
 }
