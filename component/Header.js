@@ -26,6 +26,7 @@ import {
 import { useState } from "react";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useRouter } from "next/router";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -36,7 +37,7 @@ const Search = styled("div")(({ theme }) => ({
 	},
 	marginLeft: 0,
 	width: "100%",
-	[theme.breakpoints.up("sm")]: {
+	[theme.breakpoints.up("lg")]: {
 		marginLeft: theme.spacing(1),
 		width: "auto",
 	},
@@ -72,7 +73,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [sideMenu, setSideMenu] = useState(false);
-
+	const router = useRouter();
 	const toggleDrawer = (open) => (event) => {
 		if (
 			event.type === "keydown" &&
@@ -192,6 +193,15 @@ export default function Header() {
 								<StyledInputBase
 									placeholder="Search…"
 									inputProps={{ "aria-label": "search" }}
+									onKeyDown={(e) => {
+										if (e.key === "Enter") {
+											if (e.target.value) {
+												router.push(
+													`/search?q=${encodeURIComponent(e.target.value)}`
+												);
+											}
+										}
+									}}
 								/>
 							</Search>
 
