@@ -5,7 +5,7 @@ import Page from "../component/Page";
 export default function Home({ data }) {
 	const router = useRouter();
 	return (
-		<Page title={data.data?.attributes?.hero?.title || "SMARTJINNY"}>
+		<Page title={"SMARTJINNY"}>
 			{/* <!-- ====== Hero Section Start --> */}
 			<div
 				id="home"
@@ -39,7 +39,7 @@ export default function Home({ data }) {
 				  uppercase
                 "
 								>
-									{data.data?.attributes?.hero?.heading1 || "SMARTJINNY"}
+									{"SMARTJINNY"}
 								</h1>
 								<p
 									className="
@@ -52,8 +52,7 @@ export default function Home({ data }) {
                   max-w-[600px]
                 "
 								>
-									{data.data?.attributes?.hero?.headingDescription ||
-										"Description"}
+									{"Description"}
 								</p>
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
@@ -81,7 +80,8 @@ export default function Home({ data }) {
 									</li>
 									<li>
 										<a
-											href="/blog"
+											href="https://smartjin.notion.site/smartjin/SMARTJINNY-f322787e7d4f4dc49e9938afc57250b6"
+											target="__blank"
 											className="
                       text-base
                       font-medium
@@ -2585,17 +2585,13 @@ export default function Home({ data }) {
 			>
 				Sign In
 			</a>
-			{JSON.stringify(data)}
 		</Page>
 	);
 }
 
 // This gets called on every request
 export async function getServerSideProps() {
-	// Fetch data from external API
-	const res = await fetch(`${process.env.BASE_URL}/api/home`);
-	const data = await res.json();
-
+	var data = [];
 	// Pass data to the page via props
 	return { props: { data } };
 }

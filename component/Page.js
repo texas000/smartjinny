@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Head from "next/head";
 import { Fragment } from "react";
+import Script from "next/script";
 export default function Page({ children, title, description }) {
 	return (
 		<Fragment>
@@ -13,6 +14,16 @@ export default function Page({ children, title, description }) {
 						"Smartjinny, Professional Software Developer Portfolio Website"
 					}
 				></meta>
+
+				<Script id="google-tag-manager" strategy="afterInteractive">
+					{`
+	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-T5KW8HH');
+	`}
+				</Script>
 				<meta property="og:site_name" content="SMARTJINNY" />
 				<meta property="og:type" content="article" />
 				<meta property="og:title" content="SMARTJINNY" />
@@ -35,6 +46,15 @@ export default function Page({ children, title, description }) {
 
 			<Header />
 			{children}
+
+			<noscript>
+				<iframe
+					src="https://www.googletagmanager.com/ns.html?id=GTM-T5KW8HH"
+					height="0"
+					width="0"
+					style={{ display: "none", visibility: "hidden" }}
+				></iframe>
+			</noscript>
 		</Fragment>
 	);
 }
