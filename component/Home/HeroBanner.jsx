@@ -1,8 +1,58 @@
-import { Alert } from "@mui/material";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Alert, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 
-export default function HeroBanner() {
+import useMediaQuery from "@mui/material/useMediaQuery";
+import React from "react";
+
+export default function HeroBanner({ title, mTitle }) {
 	const matches = useMediaQuery("(min-width:600px)");
+
+	const [state, setState] = React.useState({
+		top: false,
+		left: false,
+		bottom: false,
+		right: false,
+	});
+	const toggleDrawer = (anchor, open) => (event) => {
+		if (
+			event &&
+			event.type === "keydown" &&
+			(event.key === "Tab" || event.key === "Shift")
+		) {
+			return;
+		}
+
+		setState({ ...state, [anchor]: open });
+	};
+
+	const list = (anchor) => (
+		<Box
+			sx={{ width: "90vw", height: "90vh" }}
+			role="presentation"
+			onClick={toggleDrawer(anchor, false)}
+			onKeyDown={toggleDrawer(anchor, false)}
+		>
+			<iframe
+				width="100%"
+				height="100%"
+				style={{ margin: "auto" }}
+				src="https://www.youtube.com/embed/Dhkw8JVB28I"
+				title="meenoi(미노이) - [Fuxk off] (Official M/V)"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen
+			></iframe>
+		</Box>
+	);
 	return (
 		<>
 			<Alert onClose={() => {}}>
@@ -41,21 +91,24 @@ export default function HeroBanner() {
 				  uppercase
                 "
 								>
-									{matches ? "SMARTJINNY" : "MOBILE"}
+									{matches ? title : mTitle}
 								</h1>
-								<p
-									className="
-                  text-base
-                  sm:text-lg sm:leading-relaxed
-                  md:text-xl md:leading-relaxed
-                  mx-auto
-                  mb-10
-                  text-[#e4e4e4]
-                  max-w-[600px]
-                "
+								<Button
+									variant="outlined"
+									sx={{ m: 2 }}
+									color="primary"
+									onClick={toggleDrawer("bottom", true)}
 								>
-									{"Description"}
-								</p>
+									Draft Project
+								</Button>
+								<SwipeableDrawer
+									anchor={"bottom"}
+									open={state["bottom"]}
+									onClose={toggleDrawer("bottom", false)}
+									onOpen={toggleDrawer("bottom", true)}
+								>
+									{list("bottom")}
+								</SwipeableDrawer>
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
 										<a

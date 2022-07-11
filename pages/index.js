@@ -7,7 +7,7 @@ export default function Home({ data }) {
 	const router = useRouter();
 	return (
 		<Page title={"SMARTJINNY"}>
-			<HeroBanner />
+			<HeroBanner title="SMARTJINNY" mTitle="SMARTJIN" />
 			{/* <!-- ====== Features Section Start --> */}
 			<section className="pt-20 lg:pt-[120px] pb-8 lg:pb-[70px]">
 				<div className="container">

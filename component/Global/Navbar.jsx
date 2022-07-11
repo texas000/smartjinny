@@ -70,7 +70,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	},
 }));
 
-export default function Header() {
+export default function Navbar() {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [sideMenu, setSideMenu] = useState(false);
 	const router = useRouter();

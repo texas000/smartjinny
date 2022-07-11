@@ -1,7 +1,9 @@
-import Header from "./Header";
 import Head from "next/head";
 import { Fragment } from "react";
 import Script from "next/script";
+import Footer from "./Global/Footer";
+import Navbar from "./Global/Navbar";
+
 export default function Page({ children, title, description }) {
 	return (
 		<Fragment>
@@ -51,8 +53,10 @@ export default function Page({ children, title, description }) {
 				></iframe>
 			</noscript>
 
-			<Header />
+			<Navbar />
 			{children}
+
+			<Footer />
 		</Fragment>
 	);
 }

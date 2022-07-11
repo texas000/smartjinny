@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import useSWR from "swr";
 import { useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Button, Card, Grid, Popover } from "@mui/material";
 
 function Copyright() {
 	return (
@@ -23,23 +23,67 @@ function Copyright() {
 	);
 }
 
-function CardResult({ id, title, sub, path, raw }) {
+function CardResult({ id, title, sub, path, raw, detail }) {
+	const [anchorEl, setAnchorEl] = useState(null);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
+	const rawId = open ? "simple-popover" : undefined;
 	return (
 		<Box key={id}>
-			<Grid container spacing={2}>
-				<Grid item xs={8}>
-					<Typography>{title}</Typography>
+			<Card variant="outlined" sx={{ boxShadow: 3, margin: 2, padding: 1 }}>
+				<Grid container spacing={2}>
+					<Grid item xs={8}>
+						<Button
+							variant="outlined"
+							disabled={!path}
+							onClick={() => {
+								window.open(path, "_blank");
+							}}
+						>
+							{title}
+						</Button>
+					</Grid>
+					<Grid item xs={4} display="flex" justifyContent="flex-end">
+						<Button
+							variant="text"
+							color="primary"
+							aria-describedby={rawId}
+							onClick={handleClick}
+						>
+							Raw Data
+						</Button>
+						<Popover
+							id={rawId}
+							open={open}
+							anchorEl={anchorEl}
+							onClose={handleClose}
+							anchorOrigin={{
+								vertical: "bottom",
+								horizontal: "left",
+							}}
+							sx={{ overflow: "scroll" }}
+						>
+							<Typography sx={{ p: 2, fontFamily: "monospace" }}>
+								{raw}
+							</Typography>
+						</Popover>
+					</Grid>
+					<Grid item xs={4}>
+						<Typography>{sub}</Typography>
+					</Grid>
+					<Grid item xs={8}>
+						<Typography>{detail}</Typography>
+					</Grid>
 				</Grid>
-				<Grid item xs={4}>
-					<Typography>{sub}</Typography>
-				</Grid>
-				<Grid item xs={4}>
-					<Typography>xs=4</Typography>
-				</Grid>
-				<Grid item xs={8}>
-					<Typography>xs=8</Typography>
-				</Grid>
-			</Grid>
+			</Card>
 		</Box>
 	);
 }
@@ -55,9 +99,7 @@ export default function Home({ query }) {
 			: null,
 		fetcher
 	);
-	useEffect(() => {
-		console.log(git);
-	}, [git]);
+
 	const { data: dict } = useSWR(
 		query
 			? `https://api.dictionaryapi.dev/api/v2/entries/en_US/${encodeURIComponent(
@@ -66,6 +108,9 @@ export default function Home({ query }) {
 			: null,
 		fetcher
 	);
+	useEffect(() => {
+		console.log(dict);
+	}, [dict]);
 
 	return (
 		<Page title={"SEARCH"}>
@@ -78,41 +123,38 @@ export default function Home({ query }) {
 			>
 				<CssBaseline />
 				<Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-					<Typography variant="h2" component="h1" gutterBottom>
-						{JSON.stringify(query)}
+					<Typography variant="h4" component="h1" gutterBottom>
+						{`Search result for "${query}"`}
+					</Typography>
+					<Typography variant="p" gutterBottom>
+						{`${git?.items.length} Search results found in Github`}
 					</Typography>
 
-					{git?.items.map(({ sha, name, git_url, score }) => (
-						<CardResult id={sha} title={name} sub={score} path={git_url} />
+					{git?.items.map(({ sha, name, html_url, path, repository }, i) => (
+						<CardResult
+							id={sha}
+							title={name}
+							path={html_url}
+							sub={repository.name}
+							detail={path}
+							raw={JSON.stringify(git?.items[i])}
+						/>
 					))}
-
-					{/* {JSON.stringify(git)} */}
-					{/* {JSON.stringify(dict)} */}
-					{/* <Typography variant="h5" component="h2" gutterBottom>
-						{"Pin a footer to the bottom of the viewport."}
-						{"The footer will move as the main element of the page grows."}
-					</Typography> */}
-					{/* <Typography variant="body1">Sticky footer placeholder.</Typography> */}
+					{dict &&
+						dict.length &&
+						dict?.map(({ word, meanings, phonetic }) =>
+							meanings?.map(({ definitions }, i) => (
+								<CardResult
+									id={i}
+									title={word}
+									path={false}
+									sub={phonetic}
+									detail={definitions[0].definition}
+									raw={JSON.stringify(definitions)}
+								/>
+							))
+						)}
 				</Container>
-				<Box
-					component="footer"
-					sx={{
-						py: 3,
-						px: 2,
-						mt: "auto",
-						backgroundColor: (theme) =>
-							theme.palette.mode === "light"
-								? theme.palette.grey[200]
-								: theme.palette.grey[800],
-					}}
-				>
-					<Container maxWidth="sm">
-						<Typography variant="body1">
-							My sticky footer can be found here.
-						</Typography>
-						<Copyright />
-					</Container>
-				</Box>
 			</Box>
 		</Page>
 	);
