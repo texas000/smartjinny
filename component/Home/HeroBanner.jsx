@@ -1,21 +1,25 @@
-import { Alert, Button } from "@mui/material";
+import { Alert, Button, ListItemButton, ListItemText } from "@mui/material";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React from "react";
+import { publicIpv4 } from "public-ip";
+import { useEffect } from "react";
 
 export default function HeroBanner({ title, mTitle }) {
 	const matches = useMediaQuery("(min-width:600px)");
+	const [Ip, setIp] = React.useState(null);
+	useEffect(() => {
+		getip();
+	}, []);
 
+	async function getip() {
+		var ip = await publicIpv4();
+		const fetchGeo = await fetch(`/api/zipcode?ip=${ip}`);
+		const geo = await fetchGeo.json();
+		setIp(geo);
+	}
 	const [state, setState] = React.useState({
 		top: false,
 		left: false,
@@ -33,24 +37,28 @@ export default function HeroBanner({ title, mTitle }) {
 
 		setState({ ...state, [anchor]: open });
 	};
-
 	const list = (anchor) => (
 		<Box
-			sx={{ width: "90vw", height: "90vh" }}
+			sx={{ width: "100%" }}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
-			<iframe
-				width="100%"
-				height="100%"
-				style={{ margin: "auto" }}
-				src="https://www.youtube.com/embed/Dhkw8JVB28I"
-				title="meenoi(미노이) - [Fuxk off] (Official M/V)"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			></iframe>
+			<ListItemButton component="a">
+				<ListItemText primary={Ip?.zip?.zip} secondary="Zip Code" />
+			</ListItemButton>
+			<ListItemButton component="a">
+				<ListItemText primary={Ip?.zip?.city} secondary="City" />
+			</ListItemButton>
+			<ListItemButton component="a">
+				<ListItemText primary={Ip?.zip?.state} secondary="State" />
+			</ListItemButton>
+			<ListItemButton component="a">
+				<ListItemText primary={Ip?.zip?.country} secondary="Country" />
+			</ListItemButton>
+			<ListItemButton component="a">
+				<ListItemText primary={Ip?.ip} secondary="IP Address" />
+			</ListItemButton>
 		</Box>
 	);
 	return (
@@ -61,7 +69,7 @@ export default function HeroBanner({ title, mTitle }) {
 			</Alert>
 			<div
 				id="home"
-				className="relative pt-[120px] md:pt-[130px] lg:pt-[160px] bg-primary"
+				className="relative pt-[120px] md:pt-[130px] lg:pt-[100px] bg-primary"
 			>
 				<div className="container">
 					<div className="flex flex-wrap items-center -mx-4">
@@ -99,7 +107,7 @@ export default function HeroBanner({ title, mTitle }) {
 									color="primary"
 									onClick={toggleDrawer("bottom", true)}
 								>
-									Draft Project
+									Geo Location
 								</Button>
 								<SwipeableDrawer
 									anchor={"bottom"}
