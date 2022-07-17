@@ -6,10 +6,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import React from "react";
 import { publicIpv4 } from "public-ip";
 import { useEffect } from "react";
+import AgentProfile from "../AgentProfile";
 
 export default function HeroBanner({ title, mTitle }) {
 	const matches = useMediaQuery("(min-width:600px)");
 	const [Ip, setIp] = React.useState(null);
+	const [agent, setAgent] = React.useState(false);
 	useEffect(() => {
 		getip();
 	}, []);
@@ -63,7 +65,7 @@ export default function HeroBanner({ title, mTitle }) {
 	);
 	return (
 		<>
-			<Alert onClose={() => {}}>
+			<Alert onClose={() => {}} color="success">
 				Oops, the page is under construction at the moment, please contact me
 				via admin@smartjinny.com if you have any question
 			</Alert>
@@ -104,11 +106,12 @@ export default function HeroBanner({ title, mTitle }) {
 								<Button
 									variant="outlined"
 									sx={{ m: 2 }}
-									color="primary"
+									color="secondary"
 									onClick={toggleDrawer("bottom", true)}
 								>
 									Geo Location
 								</Button>
+
 								<SwipeableDrawer
 									anchor={"bottom"}
 									open={state["bottom"]}
@@ -117,6 +120,21 @@ export default function HeroBanner({ title, mTitle }) {
 								>
 									{list("bottom")}
 								</SwipeableDrawer>
+
+								<Button
+									variant="outlined"
+									sx={{ m: 2 }}
+									color="secondary"
+									onClick={() => setAgent(!agent)}
+								>
+									Agent List
+								</Button>
+								<AgentProfile
+									loading={false}
+									open={agent}
+									handleClose={() => setAgent(!agent)}
+								/>
+
 								<ul className="flex flex-wrap items-center justify-center mb-10">
 									<li>
 										<a

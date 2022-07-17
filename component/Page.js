@@ -1,12 +1,27 @@
 import Head from "next/head";
-import { Fragment } from "react";
 import Script from "next/script";
 import Footer from "./Global/Footer";
 import Navbar from "./Global/Navbar";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+	palette: {
+		mode: "dark",
+		primary: {
+			main: "#0052cc",
+		},
+		secondary: {
+			main: "#edf2ff",
+		},
+		success: {
+			main: "#008000",
+		},
+	},
+});
 
 export default function Page({ children, title, description }) {
 	return (
-		<Fragment>
+		<ThemeProvider theme={theme}>
 			<Head>
 				<title>{title || "Smartjinny"}</title>
 				<meta
@@ -57,6 +72,6 @@ export default function Page({ children, title, description }) {
 			{children}
 
 			<Footer />
-		</Fragment>
+		</ThemeProvider>
 	);
 }

@@ -100,6 +100,11 @@ export default function Home({ query }) {
 		fetcher
 	);
 
+	const { data: wiki } = useSWR(
+		query ? `/api/wikiSearch?q=${query}` : null,
+		fetcher
+	);
+
 	const { data: dict } = useSWR(
 		query
 			? `https://api.dictionaryapi.dev/api/v2/entries/en_US/${encodeURIComponent(
@@ -109,8 +114,8 @@ export default function Home({ query }) {
 		fetcher
 	);
 	useEffect(() => {
-		console.log(dict);
-	}, [dict]);
+		console.log(wiki);
+	}, [wiki]);
 
 	return (
 		<Page title={"SEARCH"}>
@@ -130,6 +135,12 @@ export default function Home({ query }) {
 						{`${git?.items.length} Search results found in Github`}
 					</Typography>
 
+					<Typography variant="p" gutterBottom>
+						<div
+							dangerouslySetInnerHTML={{ __html: wiki?.parse?.text["*"] }}
+						></div>
+						{/* {wiki?.parse?.text["*"]} */}
+					</Typography>
 					{git?.items.map(({ sha, name, html_url, path, repository }, i) => (
 						<CardResult
 							id={sha}
