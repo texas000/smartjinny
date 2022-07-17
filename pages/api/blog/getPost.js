@@ -9,6 +9,6 @@ export default async (req, res) => {
 
 	// let o_id = new ObjectId(req.query.id.trim());
 	const post = await db.collection("blog").findOne({ _id: o_id });
-
+	
 	res.json(post);
 };

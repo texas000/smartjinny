@@ -3,6 +3,7 @@ import Script from "next/script";
 import Footer from "./Global/Footer";
 import Navbar from "./Global/Navbar";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { SnackbarProvider } from "notistack";
 
 const theme = createTheme({
 	palette: {
@@ -68,9 +69,16 @@ export default function Page({ children, title, description }) {
 				></iframe>
 			</noscript>
 
-			<Navbar />
-			{children}
-
+			<SnackbarProvider
+				maxSnack={3}
+				anchorOrigin={{
+					vertical: "top",
+					horizontal: "center",
+				}}
+			>
+				<Navbar />
+				{children}
+			</SnackbarProvider>
 			<Footer />
 		</ThemeProvider>
 	);

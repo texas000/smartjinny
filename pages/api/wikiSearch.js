@@ -1,6 +1,5 @@
 export default async (req, res) => {
 	var status;
-	console.log(encodeURIComponent(req.query.q));
 	const data = await fetch(
 		`https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(
 			req.query.q

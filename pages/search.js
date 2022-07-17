@@ -43,6 +43,7 @@ function CardResult({ id, title, sub, path, raw, detail }) {
 					<Grid item xs={8}>
 						<Button
 							variant="outlined"
+							color="secondary"
 							disabled={!path}
 							onClick={() => {
 								window.open(path, "_blank");
@@ -54,7 +55,7 @@ function CardResult({ id, title, sub, path, raw, detail }) {
 					<Grid item xs={4} display="flex" justifyContent="flex-end">
 						<Button
 							variant="text"
-							color="primary"
+							color="secondary"
 							aria-describedby={rawId}
 							onClick={handleClick}
 						>
@@ -104,6 +105,10 @@ export default function Home({ query }) {
 		query ? `/api/wikiSearch?q=${query}` : null,
 		fetcher
 	);
+	const { data: customer } = useSWR(
+		query ? `/api/mongo/search?query=${query}` : null,
+		fetcher
+	);
 
 	const { data: dict } = useSWR(
 		query
@@ -114,8 +119,8 @@ export default function Home({ query }) {
 		fetcher
 	);
 	useEffect(() => {
-		console.log(wiki);
-	}, [wiki]);
+		console.log(customer);
+	}, [customer]);
 
 	return (
 		<Page title={"SEARCH"}>
@@ -131,10 +136,21 @@ export default function Home({ query }) {
 					<Typography variant="h4" component="h1" gutterBottom>
 						{`Search result for "${query}"`}
 					</Typography>
+					{/* {JSON.stringify(blog)} */}
 					<Typography variant="p" gutterBottom>
 						{`${git?.items.length} Search results found in Github`}
 					</Typography>
-
+					{customer?.map(({ _id, username, name, address, email }, i) => (
+						<CardResult
+							key={_id}
+							id={_id}
+							title={name}
+							path={address}
+							sub={username}
+							detail={email}
+							raw={JSON.stringify(customer[i])}
+						/>
+					))}
 					<Typography variant="p" gutterBottom>
 						<div
 							dangerouslySetInnerHTML={{ __html: wiki?.parse?.text["*"] }}

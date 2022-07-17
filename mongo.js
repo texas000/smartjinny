@@ -18,7 +18,7 @@ if (!dbName) {
 	);
 }
 
-export async function connectToDatabase() {
+export async function connectToDatabase({ database }) {
 	if (cachedClient && cachedDb) {
 		return { client: cachedClient, db: cachedDb };
 	}
@@ -28,7 +28,7 @@ export async function connectToDatabase() {
 		useUnifiedTopology: true,
 	});
 
-	const db = await client.db(dbName);
+	const db = await client.db(database ? database : dbName);
 
 	cachedClient = client;
 	cachedDb = db;

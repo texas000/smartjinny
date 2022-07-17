@@ -10,6 +10,7 @@ import {
 	Dialog,
 	DialogContent,
 	DialogTitle,
+	Grid,
 	ListItemButton,
 	ListItemText,
 	ThemeProvider,
@@ -19,6 +20,7 @@ import {
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LaunchIcon from "@mui/icons-material/Launch";
+import CloseIcon from "@mui/icons-material/Close";
 import { useTheme } from "@mui/material/styles";
 import useSWR from "swr";
 
@@ -64,7 +66,14 @@ export default function AgentProfile({ loading, open, handleClose }) {
 			>
 				{data ? (
 					<>
-						<DialogTitle>Agent Information</DialogTitle>
+						<DialogTitle>
+							<Grid container direction="row" justifyContent="space-between">
+								<Grid>Agent Information</Grid>
+								<Grid>
+									<CloseIcon onClick={handleClose} className="cursor-pointer" />
+								</Grid>
+							</Grid>
+						</DialogTitle>
 						<DialogContent>
 							<Card>
 								<CardHeader
