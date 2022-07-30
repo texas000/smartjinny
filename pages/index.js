@@ -1,12 +1,10 @@
-import React, { Fragment, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import Page from "../component/Page";
 import HeroBanner from "../component/Home/HeroBanner";
 
 export default function Home({ data }) {
-	const router = useRouter();
-	return (
-		<Page title={"SMARTJINNY"} notiOpen={true} notiText={"Hello World"}>
+		return (
+		<Page title={"SMARTJINNY"}>
 			<HeroBanner title="SMARTJINNY" mTitle="SMARTJIN" />
 			{/* <!-- ====== Features Section Start --> */}
 			<section className="pt-20 lg:pt-[120px] pb-8 lg:pb-[70px]">

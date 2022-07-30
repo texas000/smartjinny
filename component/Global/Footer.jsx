@@ -14,11 +14,13 @@ export default function Footer() {
 						: theme.palette.grey[800],
 			}}
 		>
+			
 			<Container maxWidth="sm">
-				<Typography variant="body1">
-					THE MOST SECURE WEBSITE
-				</Typography>
-				<Typography variant="body2" color="text.secondary">
+				<p className="text-white font font-bold tracking-tight">
+					THE MOST SECURE WEBSITE, SMARTJINNY
+				</p>
+				
+				<Typography variant="body2" color="text.secondary" className="text-white font font-thin">
 					{"Copyright © "}
 					<Link color="inherit" href="/">
 						SMARTJINNY
