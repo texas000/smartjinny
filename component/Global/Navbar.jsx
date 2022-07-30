@@ -106,7 +106,7 @@ export default function Navbar() {
 			</List>
 			<Divider />
 			<List>
-				{["blog", "contact", "sign", "file"].map((text, index) => (
+				{["news", "blog", "contact", "sign", "file"].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton href={`/${text}`}>
 							<ListItemIcon>
