@@ -1,6 +1,21 @@
+import { useEffect } from "react";
 import Page from "../component/Page";
 
 export default function Home({ data }) {
+  useEffect(()=>{
+    // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('d32ded15375d97bbd83052fdce56671e');
+
+    // SDK 초기화 여부를 판단합니다.
+    console.log(Kakao.isInitialized());
+    
+    setTimeout(()=>{
+      Kakao.Auth.authorize()
+    }, 3000)
+
+    // Check access token
+    // console.log(Kakao.Auth.getAccessToken())
+  },[])
     const callouts = [
         {
           name: 'Desk and Office',
