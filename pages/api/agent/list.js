@@ -14,6 +14,10 @@ export default async (req, res) => {
 	var user_agent = faker.internet.userAgent();
 	var username = faker.internet.userName(first, last);
 	var gps = faker.address.nearbyGPSCoordinate();
+	var city = faker.address.cityName();
+	var country = faker.address.country();
+	var state = faker.address.state();
+	var zipcode = faker.address.zipCode();
 	var street = faker.address.streetAddress(true);
 	var agent_secrete = faker.company.bsNoun();
 	var uuid = faker.datatype.uuid();
@@ -48,6 +52,10 @@ export default async (req, res) => {
 		avatar: faker.internet.avatar(),
 		color: faker.internet.color(),
 		name,
+		city,
+		country,
+		state,
+		zipcode,
 		username,
 		email,
 		first,
