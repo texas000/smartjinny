@@ -7,11 +7,7 @@ export default function Home({ data }) {
     Kakao.init('d32ded15375d97bbd83052fdce56671e');
 
     // SDK 초기화 여부를 판단합니다.
-    console.log(Kakao.isInitialized());
-    
-    setTimeout(()=>{
-      Kakao.Auth.authorize()
-    }, 3000)
+    console.log(Kakao.isInitialized());   
 
     // Check access token
     // console.log(Kakao.Auth.getAccessToken())
