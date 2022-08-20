@@ -20,18 +20,18 @@ const theme = createTheme({
 	},
 	typography: {
 		fontFamily: [
-		  '-apple-system',
-		  'BlinkMacSystemFont',
-		  '"Segoe UI"',
-		  'Roboto',
-		  '"Helvetica Neue"',
-		  'Arial',
-		  'sans-serif',
-		  '"Apple Color Emoji"',
-		  '"Segoe UI Emoji"',
-		  '"Segoe UI Symbol"',
-		].join(','),
-	  },
+			"-apple-system",
+			"BlinkMacSystemFont",
+			'"Segoe UI"',
+			"Roboto",
+			'"Helvetica Neue"',
+			"Arial",
+			"sans-serif",
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(","),
+	},
 });
 
 export default function Page({ children, title, description }) {
@@ -65,9 +65,9 @@ export default function Page({ children, title, description }) {
 				></meta>
 				<link rel="icon" href="/assets/images/favicon.png" />
 			</Head>
-			
+
 			<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-			
+
 			<Script id="google-tag-manager" strategy="afterInteractive">
 				{`
 	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
