@@ -154,9 +154,12 @@ export default function Navbar() {
 	return (
 		<>
 			<Box sx={{ flexGrow: 1 }}>
-				<AppBar position="static">
+				<AppBar
+					position="static"
+					style={{ alignItems: "center", background: "#424245" }}
+				>
 					<Container maxWidth="xl">
-						<Toolbar disableGutters>
+						<Toolbar disableGutters variant="dense">
 							<IconButton
 								size="large"
 								edge="start"
@@ -185,6 +188,24 @@ export default function Navbar() {
 							>
 								SMARTJINNY
 							</Typography>
+							<Box
+								style={{ flexGrow: 1 }}
+								onClick={() => router.push("/")}
+								className="cursor-pointer"
+							>
+								<Avatar
+									className="outline outline-offset-2 outline-white"
+									sx={{
+										height: "35px",
+										width: "35px",
+
+										backgroundColor: "white",
+										display: { xs: "none", md: "flex" },
+										mr: 1,
+									}}
+									src="/assets/images/favicon.png"
+								/>
+							</Box>
 
 							<Search sx={{ mr: 2 }}>
 								<SearchIconWrapper>
@@ -204,7 +225,6 @@ export default function Navbar() {
 									}}
 								/>
 							</Search>
-
 							<Box>
 								<Tooltip title="Open settings">
 									<IconButton
