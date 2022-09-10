@@ -1,10 +1,12 @@
 import React from "react";
 import Page from "../component/Page";
 import HeroBanner from "../component/Home/HeroBanner";
+import { Constant } from "../common/constant";
 
 export default function Home({ data }) {
+		console.log(data)
 		return (
-		<Page title={"SMARTJINNY"}>
+		<Page title={data?.siteName||"SMARTJINNY"} description={data?.defaultSeo?.metaDescription}>
 			<HeroBanner title="SMARTJINNY" mTitle="SMARTJIN" />
 			{/* <!-- ====== Features Section Start --> */}
 			<section className="pt-20 lg:pt-[120px] pb-8 lg:pb-[70px]">
@@ -1307,8 +1309,19 @@ export default function Home({ data }) {
 }
 
 // This gets called on every request
+
 export async function getServerSideProps() {
+	
+	// GLOBAL LAYOUT
 	var data = [];
-	// Pass data to the page via props
+	const response = await fetch(`${Constant.CMS_URL}/global`);
+	console.log(response.status)
+	const json = await response.json();
+	data = json;
+
+	// TODO: HOME PAGE CONTENT NEED TO BE CHANGED IN CMS
+
+    // `${Constant.CMS_URL}/global`
+
 	return { props: { data } };
 }

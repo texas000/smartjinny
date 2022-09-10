@@ -38,12 +38,12 @@ export default function Page({ children, title, description }) {
 	return (
 		<ThemeProvider theme={theme}>
 			<Head>
-				<title>{title || "Smartjinny"}</title>
+				<title>{title || "SMARTJINNY"}</title>
 				<meta
 					name="description"
 					content={
 						description ||
-						"Smartjinny, Professional Software Developer Portfolio Website"
+						"Default Description"
 					}
 				></meta>
 				<meta property="og:site_name" content="SMARTJINNY" />
@@ -60,13 +60,11 @@ export default function Page({ children, title, description }) {
 					property="og:description"
 					content={
 						description ||
-						"Smartjinny, Professional Software Developer Portfolio Website"
+						"Default Description"
 					}
 				></meta>
 				<link rel="icon" href="/assets/images/favicon.png" />
 			</Head>
-
-			<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 			<Script id="google-tag-manager" strategy="afterInteractive">
 				{`
