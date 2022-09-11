@@ -1,10 +1,16 @@
 import React from "react";
 import Page from "../component/Page";
 import HeroBanner from "../component/Home/HeroBanner";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 import { Constant } from "../common/constant";
 
+
 export default function Home({ data }) {
-		console.log(data)
+	const raw = Cookies.get("user_session");
+	const token = jwt.decode(raw);
+	console.log('user-token', token)
+
 		return (
 		<Page title={data?.siteName||"SMARTJINNY"} description={data?.defaultSeo?.metaDescription}>
 			<HeroBanner title="SMARTJINNY" mTitle="SMARTJIN" />

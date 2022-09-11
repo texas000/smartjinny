@@ -106,7 +106,7 @@ export default function Navbar() {
 			</List>
 			<Divider />
 			<List>
-				{["news", "blog", "contact", "sign", "file"].map((text, index) => (
+				{["news", "articles", "contact", "sign", "search", "pdp", "plp", "component"].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton href={`/${text}`}>
 							<ListItemIcon>
@@ -194,11 +194,10 @@ export default function Navbar() {
 								className="cursor-pointer"
 							>
 								<Avatar
-									className="outline outline-offset-2 outline-white"
+									className="outline outline-offset-2 outline-white rounded-full"
 									sx={{
 										height: "35px",
 										width: "35px",
-
 										backgroundColor: "white",
 										display: { xs: "none", md: "flex" },
 										mr: 1,
