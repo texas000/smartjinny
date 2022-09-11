@@ -27,6 +27,7 @@ import { useState } from "react";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useRouter } from "next/router";
+import { GNB } from "../../common/constant";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -106,13 +107,10 @@ export default function Navbar() {
 			</List>
 			<Divider />
 			<List>
-				{["news", "articles", "contact", "sign", "search", "pdp", "plp", "component"].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton href={`/${text}`}>
-							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} className="uppercase" />
+				{GNB.map((ga) => (
+					<ListItem key={ga.path} disablePadding>
+						<ListItemButton href={ga.path}>
+							<ListItemText primary={ga.label} />
 						</ListItemButton>
 					</ListItem>
 				))}
