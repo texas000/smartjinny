@@ -5,14 +5,16 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { Constant } from "../common/constant";
 
-
 export default function Home({ data }) {
 	const raw = Cookies.get("user_session");
 	const token = jwt.decode(raw);
-	console.log('user-token', token)
+	console.log("user-token", token);
 
-		return (
-		<Page title={data?.siteName||"SMARTJINNY"} description={data?.defaultSeo?.metaDescription}>
+	return (
+		<Page
+			title={data?.siteName || "SMARTJINNY"}
+			description={data?.defaultSeo?.metaDescription}
+		>
 			<HeroBanner title="SMARTJINNY" mTitle="SMARTJIN" />
 			{/* <!-- ====== Features Section Start --> */}
 			<section className="pt-20 lg:pt-[120px] pb-8 lg:pb-[70px]">
@@ -1316,18 +1318,18 @@ export default function Home({ data }) {
 
 // This gets called on every request
 
-export async function getServerSideProps() {
-	
+export async function getServerSideProps({ req, res }) {
+	res.setHeader("Cache-Control", "public, max-age=9999999999, must-revalidate");
+
 	// GLOBAL LAYOUT
 	var data = [];
 	const response = await fetch(`${Constant.CMS_URL}/global`);
-	console.log(response.status)
 	const json = await response.json();
 	data = json;
 
 	// TODO: HOME PAGE CONTENT NEED TO BE CHANGED IN CMS
 
-    // `${Constant.CMS_URL}/global`
+	// `${Constant.CMS_URL}/global`
 
 	return { props: { data } };
 }
