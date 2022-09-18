@@ -4,6 +4,7 @@ import Footer from "./Global/Footer";
 import Navbar from "./Global/Navbar";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
+import { useRouter } from "next/router";
 
 const theme = createTheme({
 	palette: {
@@ -34,35 +35,45 @@ const theme = createTheme({
 	},
 });
 
-export default function Page({ children, title, description }) {
+export default function Page({ children, title, description, img }) {
+	const router = useRouter();
 	return (
 		<ThemeProvider theme={theme}>
 			<Head>
 				<title>{title || "SMARTJINNY"}</title>
 				<meta
 					name="description"
-					content={
-						description ||
-						"Default Description"
-					}
+					content={description || "Default Description"}
 				></meta>
-				<meta property="og:site_name" content="SMARTJINNY" />
-				<meta property="og:type" content="article" />
-				<meta property="og:title" content="SMARTJINNY" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="robots" content="index, follow" />
-				<meta property="og:url" content="https://smartjinny.com"></meta>
+
+				<meta
+					property="og:url"
+					content={`https://smartjinny.com/${router.asPath}`}
+				/>
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content={title} />
+				<meta property="og:description" content={description} />
 				<meta
 					property="og:image"
-					content="https://smartjinny.com/images/smartjinny.jpg"
-				></meta>
+					content={img || "https://smartjinny.com/assets/images/logo/logo.jpeg"}
+				/>
+				<meta property="og:site_name" content="SMARTJINNY" />
+
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta property="twitter:domain" content="smartjinny.com" />
 				<meta
-					property="og:description"
-					content={
-						description ||
-						"Default Description"
-					}
-				></meta>
+					property="twitter:url"
+					content={`https://smartjinny.com/${router.asPath}`}
+				/>
+				<meta name="twitter:title" content={title} />
+				<meta name="twitter:description" content={description} />
+				<meta
+					name="twitter:image"
+					content={img || "https://smartjinny.com/assets/images/logo/logo.jpeg"}
+				/>
+
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="robots" content="index, follow" />
 				<link rel="icon" href="/assets/images/favicon.png" />
 			</Head>
 
