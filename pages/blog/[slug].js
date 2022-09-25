@@ -16,22 +16,32 @@ export default function Home({ data }) {
 
 	return (
 		<Page
-			title={data.title}
-			description={data.description}
-			img={data.image?.name}
+			title={data.fields?.name?.stringValue}
+			description={data.fields?.name?.stringValue}
 		>
-			{data && (
+			<div className="mt-6 mx-2 lg:mx-6 min-h-screen">
+				{data.fields.content.arrayValue.values.map((ga, i) => {
+					if (ga.mapValue.fields.type.stringValue == "text") {
+						return (
+							<article
+								key={i}
+								className="prose md:prose-lg lg:prose-xl prose-img:rounded-xl prose-img:max-w-lg prose-a:text-blue-600 hover:prose-a:text-blue-500 max-w-none"
+							>
+								<ReactMarkdown
+									children={ga.mapValue.fields.value.stringValue}
+								/>
+							</article>
+						);
+					}
+				})}
+			</div>
+			{/* {data && (
 				<div className="mt-6 mx-2 lg:mx-6 min-h-screen">
-					{/* <h1 className="text-3xl mb-5 text-gray-700">{data.title}</h1>
-
-					<div className="text-base mb-5 text-gray-700">{data.published_at}</div>
-					<div className="text-base mb-5 text-gray-700">{data.updatedAt}</div>
-					<div className="text-base mb-5 text-gray-700">{data.createdAt}</div> */}
 					<article className="prose md:prose-lg lg:prose-xl prose-img:rounded-xl prose-img:max-w-lg prose-a:text-blue-600 hover:prose-a:text-blue-500 max-w-none">
 						<ReactMarkdown children={data.content} />
 					</article>
 				</div>
-			)}
+			)} */}
 		</Page>
 	);
 }
@@ -43,7 +53,9 @@ export async function getServerSideProps({ query, res }) {
 	);
 	// GLOBAL LAYOUT
 	var data = false;
-	const response = await fetch(`${Constant.CMS_URL}/articles/${query.slug}`);
+	const response = await fetch(
+		`https://firestore.googleapis.com/v1/projects/smartjinny-cms/databases/(default)/documents/blog/${query.slug}`
+	);
 	if (response.status === 200) {
 		const json = await response.json();
 		data = json;
