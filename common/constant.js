@@ -107,7 +107,7 @@ export const GNB = [
 		label: "News",
 	},
 	{
-		path: "/articles",
+		path: "/blog",
 		label: "Blog",
 	},
 	{
