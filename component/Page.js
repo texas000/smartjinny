@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 const theme = createTheme({
 	palette: {
-		mode: "dark",
+		mode: "light",
 		primary: {
 			main: "#0052cc",
 		},
