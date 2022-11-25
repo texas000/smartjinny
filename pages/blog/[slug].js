@@ -19,7 +19,10 @@ export default function Home({ data }) {
 			title={data.fields?.name?.stringValue}
 			description={data.fields?.name?.stringValue}
 		>
-			<div className="mt-6 mx-2 lg:mx-6 min-h-screen">
+			<div className="mt-6 mx-2 lg:mx-6">
+				<h1 className='text-9xl text-center font-bold antialiased hover:subpixel-antialiased font-sans'>{data?.fields?.name?.stringValue}</h1>
+			</div>
+			<div className="mt-14 mx-2 lg:mx-6 min-h-screen font-sans">
 				{data.fields.content.arrayValue.values.map((ga, i) => {
 					if (ga.mapValue.fields.type.stringValue == "text") {
 						return (
