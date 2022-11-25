@@ -154,7 +154,7 @@ export default function Navbar() {
 				<AppBar
 					elevation={0}
 					position="static"
-					style={{ alignItems: "center", background: "#424245" }}
+					style={{ alignItems: "center", background: "#fff" }}
 				>
 					<Container maxWidth="xl">
 						<Toolbar disableGutters variant="dense" style={{display:'flex', justifyContent:"space-between", width:'100%'}}>
