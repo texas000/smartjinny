@@ -55,7 +55,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	color: "inherit",
 	"& .MuiInputBase-input": {
 		padding: theme.spacing(1, 1, 1, 0),
 		// vertical padding + font size from searchIcon
@@ -153,56 +152,35 @@ export default function Navbar() {
 		<>
 			<Box sx={{ flexGrow: 1 }}>
 				<AppBar
+					elevation={0}
 					position="static"
 					style={{ alignItems: "center", background: "#424245" }}
 				>
 					<Container maxWidth="xl">
-						<Toolbar disableGutters variant="dense">
+						<Toolbar disableGutters variant="dense" style={{display:'flex', justifyContent:"space-between", width:'100%'}}>
 							<IconButton
 								size="large"
 								edge="start"
-								color="inherit"
 								aria-label="open drawer"
 								sx={{ mr: 2 }}
 								onClick={toggleDrawer(true)}
 							>
 								<MenuIcon />
 							</IconButton>
-							<Typography
-								variant="h6"
-								noWrap
-								component="a"
-								href="/"
+							
+							<Avatar
+								onClick={() => router.push('/')}
+								className='focus:outline-none focus:ring focus:ring-violet-300 cursor-pointer'
+								variant='square'
 								sx={{
-									mr: 2,
-									flexGrow: 1,
-									display: { xs: "none", md: "flex" },
-									fontFamily: "monospace",
-									fontWeight: 700,
-									letterSpacing: ".3rem",
-									color: "inherit",
-									textDecoration: "none",
+								  height: '40px',
+								  width: '40px',
+								  backgroundColor: 'white',
+								  display: { xs: 'none', md: 'flex' },
+								  mr: 1,
 								}}
-							>
-								SMARTJINNY
-							</Typography>
-							<Box
-								style={{ flexGrow: 1 }}
-								onClick={() => router.push("/")}
-								className="cursor-pointer"
-							>
-								<Avatar
-									className="outline outline-offset-2 outline-white rounded-full"
-									sx={{
-										height: "35px",
-										width: "35px",
-										backgroundColor: "white",
-										display: { xs: "none", md: "flex" },
-										mr: 1,
-									}}
-									src="/assets/images/favicon.png"
-								/>
-							</Box>
+								src='/assets/images/favicon.png'
+							/>
 
 							<Search sx={{ mr: 2 }}>
 								<SearchIconWrapper>
@@ -222,7 +200,7 @@ export default function Navbar() {
 									}}
 								/>
 							</Search>
-							<Box>
+							{/* <Box>
 								<Tooltip title="Open settings">
 									<IconButton
 										size="large"
@@ -236,7 +214,7 @@ export default function Navbar() {
 										<AccountCircle />
 									</IconButton>
 								</Tooltip>
-							</Box>
+							</Box> */}
 						</Toolbar>
 					</Container>
 				</AppBar>
