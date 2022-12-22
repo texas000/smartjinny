@@ -3,6 +3,8 @@ export const Constant = {
 	HOME_DESC:
 		"Professional IT Project Management & Development | SMARTJINNY USA",
 	CMS_URL: "https://cms-strapi-mongo.herokuapp.com",
+	SITE_NAME: "SMARTJINNY",
+	SECONDARY_NAME: "Merry Christmas",
 	HOME_COMPONENT: [
 		{
 			TITLE: "Discover my top specifications",
