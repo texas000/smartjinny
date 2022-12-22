@@ -23,7 +23,7 @@ export default function Home({}) {
             color: "#bb2528",
           }}
         >
-          <h1 className="text-9xl font-bold antialiased">
+          <h1 className="text-4xl md:text-9xl font-bold antialiased">
             {Constant.SITE_NAME}
           </h1>
         </div>
@@ -35,7 +35,7 @@ export default function Home({}) {
             transform: "translate3d(-50%,-50%,0)",
           }}
         >
-          <h2 className="text-3xl antialiased text-[#ea4630]">
+          <h2 className="text-xl md:text-3xl antialiased text-[#ea4630]">
             {Constant.SECONDARY_NAME}
           </h2>
         </div>
