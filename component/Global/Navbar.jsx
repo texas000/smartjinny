@@ -28,6 +28,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useRouter } from "next/router";
 import { GNB } from "../../common/constant";
+import useSWR from "swr";
+import { useEffect } from "react";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -74,6 +76,17 @@ export default function Navbar() {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [sideMenu, setSideMenu] = useState(false);
 	const router = useRouter();
+	const fetcher = (...args) => fetch(...args).then((res) => res.json());
+	const [searchQuery, setSearchQuery] = useState("");
+	const { data } = useSWR(
+		searchQuery
+			? `/api/search/autoComplete?q=${encodeURIComponent(searchQuery)}`
+			: null,
+		fetcher
+	);
+	// useEffect(() => {
+	// 	console.log(data);
+	// }, [data]);
 	const toggleDrawer = (open) => (event) => {
 		if (
 			event.type === "keydown" &&
@@ -157,7 +170,15 @@ export default function Navbar() {
 					style={{ alignItems: "center", background: "#fff" }}
 				>
 					<Container maxWidth="xl">
-						<Toolbar disableGutters variant="dense" style={{display:'flex', justifyContent:"space-between", width:'100%'}}>
+						<Toolbar
+							disableGutters
+							variant="dense"
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								width: "100%",
+							}}
+						>
 							<IconButton
 								size="large"
 								edge="start"
@@ -167,19 +188,19 @@ export default function Navbar() {
 							>
 								<MenuIcon />
 							</IconButton>
-							
+
 							<Avatar
-								onClick={() => router.push('/')}
-								className='focus:outline-none focus:ring focus:ring-violet-300 cursor-pointer'
-								variant='square'
+								onClick={() => router.push("/")}
+								className="focus:outline-none focus:ring focus:ring-violet-300 cursor-pointer"
+								variant="square"
 								sx={{
-								  height: '40px',
-								  width: '40px',
-								  backgroundColor: 'white',
-								  display: { xs: 'none', md: 'flex' },
-								  mr: 1,
+									height: "40px",
+									width: "40px",
+									backgroundColor: "white",
+									display: { xs: "none", md: "flex" },
+									mr: 1,
 								}}
-								src='/assets/images/favicon.png'
+								src="/assets/images/favicon.png"
 							/>
 
 							<Search sx={{ mr: 2 }}>
@@ -189,6 +210,7 @@ export default function Navbar() {
 								<StyledInputBase
 									placeholder="Search…"
 									inputProps={{ "aria-label": "search" }}
+									onChange={(e) => setSearchQuery(e.target.value)}
 									onKeyDown={(e) => {
 										if (e.key === "Enter") {
 											if (e.target.value) {

@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import useSWR from "swr";
 import { useEffect } from "react";
-import { Button, Card, Grid, Popover } from "@mui/material";
+import { Button, Card, Grid, Popover, Skeleton } from "@mui/material";
 
 function Copyright() {
 	return (
@@ -100,7 +100,10 @@ export default function Home({ query }) {
 			: null,
 		fetcher
 	);
-
+	const { data: related } = useSWR(
+		query ? `/api/search/related?q=${encodeURIComponent(query)}` : null,
+		fetcher
+	);
 	const { data: wiki } = useSWR(
 		query ? `/api/wikiSearch?q=${query}` : null,
 		fetcher
@@ -118,9 +121,9 @@ export default function Home({ query }) {
 			: null,
 		fetcher
 	);
-	useEffect(() => {
-		console.log(customer);
-	}, [customer]);
+	// useEffect(() => {
+	// 	console.log(related);
+	// }, [related]);
 
 	return (
 		<Page title={"SEARCH"}>
@@ -136,7 +139,36 @@ export default function Home({ query }) {
 					<Typography variant="h4" component="h1" gutterBottom>
 						{`Search result for "${query}"`}
 					</Typography>
-					{/* {JSON.stringify(blog)} */}
+					{related?.default?.rankedList[1]?.rankedKeyword.length ? (
+						related?.default?.rankedList[1]?.rankedKeyword?.map((ga) => (
+							<li key={ga.query}>{ga.query}</li>
+						))
+					) : (
+						<>
+							<Skeleton
+								variant="rectangular"
+								className="my-2"
+								width={510}
+								height={10}
+								animation="wave"
+							/>
+							<Skeleton
+								variant="rectangular"
+								className="my-2"
+								width={510}
+								height={10}
+								animation="wave"
+							/>
+							<Skeleton
+								variant="rectangular"
+								className="my-2"
+								width={510}
+								height={10}
+								animation="wave"
+							/>
+						</>
+					)}
+
 					<Typography variant="p" gutterBottom>
 						{`${git?.items.length} Search results found in Github`}
 					</Typography>
