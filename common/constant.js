@@ -4,7 +4,7 @@ export const Constant = {
 		"Professional IT Project Management & Development | SMARTJINNY USA",
 	CMS_URL: "https://cms-strapi-mongo.herokuapp.com",
 	SITE_NAME: "SMARTJINNY",
-	SECONDARY_NAME: "Merry Christmas",
+	SECONDARY_NAME: "Happy New Year",
 	HOME_COMPONENT: [
 		{
 			TITLE: "Discover my top specifications",

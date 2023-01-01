@@ -10,3 +10,9 @@ export default async (req, res) => {
 			res.status(500).send(err);
 		});
 };
+
+export const config = {
+	api: {
+	  externalResolver: true,
+	},
+  };

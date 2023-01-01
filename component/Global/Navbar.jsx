@@ -22,6 +22,8 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Drawer,
+	Autocomplete,
+	TextField
 } from "@mui/material";
 import { useState } from "react";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
@@ -31,7 +33,7 @@ import { GNB } from "../../common/constant";
 import useSWR from "swr";
 import { useEffect } from "react";
 
-const Search = styled("div")(({ theme }) => ({
+const Search = styled("form")(({ theme }) => ({
 	position: "relative",
 	borderRadius: theme.shape.borderRadius,
 	backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -40,25 +42,16 @@ const Search = styled("div")(({ theme }) => ({
 	},
 	marginLeft: 0,
 	width: "100%",
+	height: "80%",
 	[theme.breakpoints.up("lg")]: {
 		marginLeft: theme.spacing(1),
 		width: "auto",
 	},
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-	padding: theme.spacing(0, 2),
-	height: "100%",
-	position: "absolute",
-	pointerEvents: "none",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const Field = styled(TextField)(({ theme }) => ({
 	"& .MuiInputBase-input": {
-		padding: theme.spacing(1, 1, 1, 0),
+		padding: theme.spacing(2, 2, 2, 0),
 		// vertical padding + font size from searchIcon
 		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
 		transition: theme.transitions.create("width"),
@@ -83,10 +76,7 @@ export default function Navbar() {
 			? `/api/search/autoComplete?q=${encodeURIComponent(searchQuery)}`
 			: null,
 		fetcher
-	);
-	// useEffect(() => {
-	// 	console.log(data);
-	// }, [data]);
+	);	
 	const toggleDrawer = (open) => (event) => {
 		if (
 			event.type === "keydown" &&
@@ -203,7 +193,7 @@ export default function Navbar() {
 								src="/assets/images/favicon.png"
 							/>
 
-							<Search sx={{ mr: 2 }}>
+							{/* <Search sx={{ mr: 2 }}>
 								<SearchIconWrapper>
 									<SearchIcon />
 								</SearchIconWrapper>
@@ -221,6 +211,29 @@ export default function Navbar() {
 										}
 									}}
 								/>
+							</Search> */}
+							<Search onSubmit={(e)=>{
+								e.preventDefault();
+								if(e.nativeEvent.type=="submit") {
+									router.push(
+										`/search?q=${encodeURIComponent(e.target[0].value)}`
+									);
+								}
+							}}>
+							<Autocomplete
+								id="free-solo-demo"
+								freeSolo
+								options={data ? data.default?.topics?.map((option) => option?.title) : []}
+								sx={{ width: 300 }}
+								onInputChange={(e,v)=> {
+									console.log(e)
+									setSearchQuery(v)
+									if(e.type=="click") {
+										router.push(`/search?q=${encodeURIComponent(v)}`);
+									}
+								}}
+								renderInput={(params) => <Field {...params}  label="Search" variant="outlined" fullWidth  />}
+							/>
 							</Search>
 							{/* <Box>
 								<Tooltip title="Open settings">

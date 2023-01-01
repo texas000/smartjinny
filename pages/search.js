@@ -170,7 +170,7 @@ export default function Home({ query }) {
 					)}
 
 					<Typography variant="p" gutterBottom>
-						{`${git?.items.length} Search results found in Github`}
+						{`${git?.items?.length} Search results found in Github`}
 					</Typography>
 					{customer?.map(({ _id, username, name, address, email }, i) => (
 						<CardResult
@@ -189,7 +189,7 @@ export default function Home({ query }) {
 						></div>
 						{/* {wiki?.parse?.text["*"]} */}
 					</Typography>
-					{git?.items.map(({ sha, name, html_url, path, repository }, i) => (
+					{git?.items?.map(({ sha, name, html_url, path, repository }, i) => (
 						<CardResult
 							id={sha}
 							title={name}

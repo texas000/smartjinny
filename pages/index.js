@@ -19,11 +19,10 @@ export default function Home({}) {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate3d(-50%,-50%,0)",
-            color: "#bb2528",
+            transform: "translate3d(-50%,-50%,0)",            
           }}
         >
-          <h1 className="text-4xl md:text-9xl font-bold antialiased">
+          <h1 className="text-4xl md:text-9xl font-bold text-white antialiased">
             {Constant.SITE_NAME}
           </h1>
         </div>
