@@ -226,7 +226,6 @@ export default function Navbar() {
 								options={data ? data.default?.topics?.map((option) => option?.title) : []}
 								sx={{ width: 300 }}
 								onInputChange={(e,v)=> {
-									console.log(e)
 									setSearchQuery(v)
 									if(e.type=="click") {
 										router.push(`/search?q=${encodeURIComponent(v)}`);
