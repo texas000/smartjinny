@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "next dev",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "next build"
 	},
 	"repository": {
 		"type": "git",
@@ -28,12 +28,12 @@
 		"@react-three/fiber": "^8.2.2",
 		"@sendgrid/mail": "^7.6.0",
 		"@svgr/webpack": "^5.5.0",
+		"daisyui": "^2.50.1",
 		"framer-motion": "^6.5.1",
 		"geoip-lite": "^1.4.5",
 		"google-trends-api": "^4.9.2",
 		"js-cookie": "^3.0.1",
 		"jsonwebtoken": "^8.5.1",
-		"maath": "^0.4.2",
 		"mongodb": "^4.4.0",
 		"next": "^12.1.0",
 		"notistack": "^2.0.5",
@@ -43,7 +43,6 @@
 		"react-markdown": "^8.0.3",
 		"swr": "^1.1.2",
 		"tailwindcss": "^3.0.8",
-		"three": "^0.143.0",
 		"xml-js": "^1.6.11",
 		"zipcodes": "^8.0.0"
 	},
