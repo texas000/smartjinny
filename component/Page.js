@@ -1,24 +1,12 @@
 import Head from "next/head";
 import Script from "next/script";
-import Footer from "./Global/Footer";
-import Navbar from "./Global/Navbar";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import { useRouter } from "next/router";
+import DesktopHeader from "./DesktopHeader";
+import DesktopFooter from "./DesktopFooter";
 
 const theme = createTheme({
-	palette: {
-		mode: "light",
-		primary: {
-			main: "#0052cc",
-		},
-		secondary: {
-			main: "#edf2ff",
-		},
-		success: {
-			main: "#008000",
-		},
-	},
 	typography: {
 		fontFamily: [
 			"-apple-system",
@@ -102,10 +90,10 @@ export default function Page({ children, title, description, img }) {
 					horizontal: "center",
 				}}
 			>
-				<Navbar />
+				<DesktopHeader/>
 				{children}
 			</SnackbarProvider>
-			<Footer />
+			<DesktopFooter />
 		</ThemeProvider>
 	);
 }
