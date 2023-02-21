@@ -1,8 +1,10 @@
+import { Fragment } from "react";
 import { Constant, GNB } from "../common/constant";
 
 export default function DesktopHeader({}) {
     return (
-      <div className="navbar bg-base-100 flex justify-between">
+        <Fragment>
+      <div className="navbar bg-base-100 flex justify-between" data-theme="cupcake">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -21,7 +23,7 @@ export default function DesktopHeader({}) {
                 />
               </svg>
             </label>
-            {/* <ul
+            <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
@@ -30,7 +32,7 @@ export default function DesktopHeader({}) {
                         <a href={ga.path}>{ga.label}</a>
                     </li>
                 ))}
-            </ul> */}
+            </ul>
           </div>
         </div>
         <div className="navbar-center">
@@ -76,5 +78,6 @@ export default function DesktopHeader({}) {
           </button> */}
         </div>
       </div>
+      </Fragment>
     );
 }

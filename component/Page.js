@@ -1,32 +1,15 @@
 import Head from "next/head";
 import Script from "next/script";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import { useRouter } from "next/router";
 import DesktopHeader from "./DesktopHeader";
 import DesktopFooter from "./DesktopFooter";
 
-const theme = createTheme({
-	typography: {
-		fontFamily: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(","),
-	},
-});
 
 export default function Page({ children, title, description, img }) {
 	const router = useRouter();
 	return (
-		<ThemeProvider theme={theme}>
+		<div data-theme="cupcake">
 			<Head>
 				<title>{title || "SMARTJINNY"}</title>
 				<meta
@@ -94,6 +77,6 @@ export default function Page({ children, title, description, img }) {
 				{children}
 			</SnackbarProvider>
 			<DesktopFooter />
-		</ThemeProvider>
+		</div>
 	);
 }
