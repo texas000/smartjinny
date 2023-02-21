@@ -1,3 +1,9 @@
+import React from "react";
+import JinEditor from "./Editor";
 export default async function Page({ params, searchParams }) {
-    return(<h1>Hello World</h1>)
+  return (
+    <div className="h-screen">
+      <JinEditor/>
+    </div>
+  );
 }
