@@ -179,7 +179,7 @@ export default async function Page() {
               <p>Wanna know the am I wrting?</p>
               <div className="card-actions justify-end">
                 <a
-                  href="https://music.youtube.com/playlist?list=PL_SamN1A4hpnAicd0cZMLVQUK4E_w_3Tj&feature=share"
+                  href="https://github.com/texas000"
                   target="_blank"
                 >
                   <button className="btn btn-primary">View Github</button>
