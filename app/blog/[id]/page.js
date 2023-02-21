@@ -1,23 +1,14 @@
-// import { NextSeo } from 'next-seo';
-import { Fragment } from "react";
-
 async function blogContent(slug) {
     const res = await fetch(`https://api.smartjinny.com/blog/content?slug=${slug}`);
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-  
-    // Recommendation: handle errors
     if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data');
-    }    
-    
-  return res.json();
+      return false;
+    }
+    return res.json();
 }
 
 export default async function Page({ params, searchParams }) {
     const data = await blogContent(params.id);
-    if(params.id) {
+    if(params.id && data) {
         return (
           <div>
             <title>{data.data?.head?.title || "Not Found"}</title>
@@ -34,5 +25,11 @@ export default async function Page({ params, searchParams }) {
             <div dangerouslySetInnerHTML={{ __html: data.data?.body }}/>
           </div>
         );
+    } else {
+        return (
+            <div>
+                <h1>Failed</h1>
+            </div>
+        )
     }
 }
