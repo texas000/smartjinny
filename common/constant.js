@@ -108,10 +108,10 @@ export const GNB = [
 		path: "/",
 		label: "Home",
 	},
-	// {
-	// 	path: "/blog",
-	// 	label: "Blog",
-	// },
+	{
+		path: "/blog",
+		label: "Blog",
+	},
 	// {
 	// 	path: "/contact",
 	// 	label: "Contact",

@@ -20,21 +20,40 @@ export default async function Page() {
     return (
       <div className="-pt-[60px]">
         {isUp ? (<div className="toast">
-          <div className="alert alert-info">
-            <div>
+          <div className="alert alert-info cursor-pointer">
+            <a href="https://api.smartjinny.com/">
               <span>Server running</span>
-            </div>
+            </a>
           </div>
         </div>):(
           <div className="toast">
           <div className="alert alert-info">
-            <div>
+            <a href="https://api.smartjinny.com/">
               <span>Server down</span>
-            </div>
+            </a>
           </div>
         </div>
         )}
 
+        <title>SMARTJINNY | DEVELOPER</title>
+        <meta
+          content="NUMBER ONE DEVELOPER WITH BEST QUALITY AND FAST BUILD"
+          name="description"
+        ></meta>
+        <meta content="SMARTJINNY | DEVELOPER" property="og:title" />
+        <meta
+          content="NUMBER ONE DEVELOPER WITH BEST QUALITY AND FAST BUILD"
+          property="og:description"
+        />
+        <meta content="SMARTJINNY | DEVELOPER" property="twitter:title" />
+        <meta
+          content="NUMBER ONE DEVELOPER WITH BEST QUALITY AND FAST BUILD"
+          property="twitter:description"
+        />
+        <meta property="og:type" content="website" />
+        <meta content="summary_large_image" name="twitter:card" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="Smartjinny" name="generator" />
 
         {/* HERO BANNER */}
         <div
