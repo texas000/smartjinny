@@ -105,35 +105,35 @@ export const Constant = {
 
 export const GNB = [
 	{
-		path: "/news",
-		label: "News",
+		path: "/",
+		label: "Home",
 	},
-	{
-		path: "/blog",
-		label: "Blog",
-	},
-	{
-		path: "/contact",
-		label: "Contact",
-	},
-	{
-		path: "/sign",
-		label: "Login",
-	},
+	// {
+	// 	path: "/blog",
+	// 	label: "Blog",
+	// },
+	// {
+	// 	path: "/contact",
+	// 	label: "Contact",
+	// },
+	// {
+	// 	path: "/sign",
+	// 	label: "Login",
+	// },
 	{
 		path: "/search",
 		label: "Search",
 	},
-	{
-		path: "/component",
-		label: "Component",
-	},
-	{
-		path: "/plp",
-		label: "PLP",
-	},
-	{
-		path: "/pdp",
-		label: "PDP",
-	},
+	// {
+	// 	path: "/component",
+	// 	label: "Component",
+	// },
+	// {
+	// 	path: "/plp",
+	// 	label: "PLP",
+	// },
+	// {
+	// 	path: "/pdp",
+	// 	label: "PDP",
+	// },
 ];
