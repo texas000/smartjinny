@@ -17,22 +17,22 @@ async function blogContent(slug) {
 
 export default async function Page({ params, searchParams }) {
     const data = await blogContent(params.id);
-    return (
-      <div>
-        <title>{data.data?.head?.title || "Not Found"}</title>
-        <meta content={data.data?.head?.description || "Not Found"} name="description"></meta>
-        <meta content={data.data?.head?.title || "Not Found"} property="og:title" />
-        <meta content={data.data?.head?.description || "Not Found"} property="og:description" />
-        <meta content={data.data?.head?.title || "Not Found"} property="twitter:title" />
-        <meta content={data.data?.head?.description || "Not Found"} property="twitter:description" />
-        <meta property="og:type" content="website" />
-        <meta content="summary_large_image" name="twitter:card" />
-	    <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="Webflow" name="generator" />
-
-        <div dangerouslySetInnerHTML={{ __html: data.data?.body }}/>
-      </div>
-    );
+    if(params.id) {
+        return (
+          <div>
+            <title>{data.data?.head?.title || "Not Found"}</title>
+            <meta content={data.data?.head?.description || "Not Found"} name="description"></meta>
+            <meta content={data.data?.head?.title || "Not Found"} property="og:title" />
+            <meta content={data.data?.head?.description || "Not Found"} property="og:description" />
+            <meta content={data.data?.head?.title || "Not Found"} property="twitter:title" />
+            <meta content={data.data?.head?.description || "Not Found"} property="twitter:description" />
+            <meta property="og:type" content="website" />
+            <meta content="summary_large_image" name="twitter:card" />
+            <meta content="width=device-width, initial-scale=1" name="viewport" />
+            <meta content="Webflow" name="generator" />
+    
+            <div dangerouslySetInnerHTML={{ __html: data.data?.body }}/>
+          </div>
+        );
+    }
 }
-// <div>{JSON.stringify(data)}</div>
-// <p>ID: {params.id}</p>
