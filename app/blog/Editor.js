@@ -9,12 +9,23 @@ const MDEditor = dynamic(
   { ssr: false }
 );
 
-async function pushContent(markdown) {
+// https://www.npmjs.com/package/@uiw/react-md-editor
+
+export default function JinEditor() {
+  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const slug = (string) => {
+    let result = string.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    return result
+  }
+
+  async function pushContent() {
     if(value && title && desc) {
         const res = await fetch(`https://api.smartjinny.com/blog/push`, {
           method: "POST",
           body: JSON.stringify({
-            markdown: markdown,
+            markdown: value,
             title: title,
             description: desc,
             slug: title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
@@ -27,18 +38,8 @@ async function pushContent(markdown) {
     } else {
         window.alert('PLEASE FILL REQUIRED FIELD')
     }
-}
-
-// https://www.npmjs.com/package/@uiw/react-md-editor
-
-export default function JinEditor() {
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const slug = (string) => {
-    let result = string.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-    return result
   }
+
   return (
     <div className="h-full p-5">
       <h1 className="font-bold">Page Name: {title !== "" && slug(title)}</h1>
@@ -69,7 +70,7 @@ export default function JinEditor() {
         </div>
         <button
           className="justify-self-end mx-auto btn font-bold"
-          onClick={() => pushContent(value)}
+          onClick={() => pushContent()}
         >
           Publish
         </button>
