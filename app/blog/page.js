@@ -1,5 +1,5 @@
 async function blogContent() {
-  const res = await fetch(`https://api.smartjinny.com/blog/list`);
+  const res = await fetch(`https://api.smartjinny.com/blog/list`, { cache: 'no-store'});
   if (!res.ok) {
     return false;
   }
