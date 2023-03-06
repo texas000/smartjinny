@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import useSWR from 'swr'
+import Loading from "../loading";
 
 export default function Page() {
         const [file, setFile] = useState(null);
+        const [isLoading, setLoading] = useState(false);
 
         const fetcher = (...args) => fetch(...args).then(res => res.json())
-        const { data, mutate, error, isLoading } = useSWR(`https://api.smartjinny.com/assets`, fetcher)
+        const { data, mutate, error } = useSWR(`https://api.smartjinny.com/assets`, fetcher)
         
         // Define the onChange handler function to update the selected file
         const onChange = (event) => {
@@ -16,6 +18,7 @@ export default function Page() {
         
         // Define the onClick handler function to send the selected file to the server
         const onClick = async () => {
+          setLoading(true)
           const formData = new FormData();
           formData.append("file", file);
 
@@ -23,8 +26,8 @@ export default function Page() {
             method: "POST",
             body: formData,
           }).then((response) => response.json()).then(mutate());
-
           console.log(res)
+          setLoading(false)
         }
     return (
       <div>
@@ -60,26 +63,30 @@ export default function Page() {
             </button>
           </div>
 
-          <div className="flex justify-center w-screen">
-            <div className="stats stats-vertical shadow w-screen">
-              {data?.map((ga) => (
-                <a
-                  className="stat hover:text-indigo-500 w-full"
-                  key={ga._id}
-                  href={`https://api.smartjinny.com/download/${ga.filename}`}
-                  target="_blank"
-                >
-                  <div className="stat-value whitespace-normal text-lg sm:text-xl w-full">
-                    {ga.filename}
-                  </div>
-                  <div className="stat-title whitespace-normal w-full">
-                    {new Date(ga.updated).toLocaleDateString()}{" "}
-                    {new Date(ga.updated).toLocaleTimeString()}
-                  </div>
-                </a>
-              ))}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className="flex justify-center w-screen">
+              <div className="stats stats-vertical shadow w-screen">
+                {data?.map((ga) => (
+                  <a
+                    className="stat hover:text-indigo-500 w-full"
+                    key={ga._id}
+                    href={`https://api.smartjinny.com/download/${ga.filename}`}
+                    target="_blank"
+                  >
+                    <div className="stat-value whitespace-normal text-lg sm:text-xl w-full">
+                      {ga.filename}
+                    </div>
+                    <div className="stat-title whitespace-normal w-full">
+                      {new Date(ga.updated).toLocaleDateString()}{" "}
+                      {new Date(ga.updated).toLocaleTimeString()}
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
