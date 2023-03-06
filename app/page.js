@@ -1,11 +1,6 @@
 async function homepageData() {
-    const res = await fetch('https://api.smartjinny.com');
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-  
-    // Recommendation: handle errors
+    const res = await fetch('https://api.smartjinny.com', {cache: 'force-cache'});
     if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data');
     }
     return res.status;
@@ -13,26 +8,25 @@ async function homepageData() {
 
 export default async function Page() {
     const isUp = await homepageData()
-    // const router = useRouter();
-    // const userAgent = router.asPath;
-    // let isMobile = /Mobi|Android/i.test(userAgent);
 
     return (
       <div className="-pt-[60px]">
-        {isUp ? (<div className="toast">
-          <div className="alert alert-info cursor-pointer">
-            <a href="https://api.smartjinny.com/">
-              <span>Server running</span>
-            </a>
-          </div>
-        </div>):(
+        {isUp ? (
           <div className="toast">
-          <div className="alert alert-info">
-            <a href="https://api.smartjinny.com/">
-              <span>Server down</span>
-            </a>
+            <div className="alert alert-info cursor-pointer">
+              <a href="https://api.smartjinny.com/">
+                <span>Server running</span>
+              </a>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="toast">
+            <div className="alert alert-info">
+              <a href="https://api.smartjinny.com/">
+                <span>Server down</span>
+              </a>
+            </div>
+          </div>
         )}
 
         <title>SMARTJINNY | DEVELOPER</title>
@@ -76,7 +70,6 @@ export default async function Page() {
           </div>
         </div>
 
-        
         <div className="mt-6 justify-items-center grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-3 xl:gap-x-6">
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
@@ -136,7 +129,7 @@ export default async function Page() {
             </div>
           </div>
         </div>
-        
+
         {/* CODE */}
         {/* <div className="mockup-code">
           <pre data-prefix="$">
@@ -197,21 +190,21 @@ export default async function Page() {
               <h2 className="card-title">MY CODING LIST!</h2>
               <p>Wanna know the am I wrting?</p>
               <div className="card-actions justify-end">
-                <a
-                  href="https://github.com/texas000"
-                  target="_blank"
-                >
+                <a href="https://github.com/texas000" target="_blank">
                   <button className="btn btn-primary">View Github</button>
                 </a>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* NOTE */}
-        <div className="text-center m-20 text-indigo-500 font-bold">Application is build with Nextjs 13, React 18, TailwindCSS, Vercel, FastAPI, MongoDB</div>
-        
-      </div>)
+        <div className="text-center m-20 text-indigo-500 font-bold">
+          Application is build with Nextjs 13, React 18, TailwindCSS, Vercel,
+          FastAPI, MongoDB
+        </div>
+      </div>
+    );
   }
 
   
