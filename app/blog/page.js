@@ -29,19 +29,20 @@ export default async function Page({ params, searchParams }) {
         <meta content="summary_large_image" name="twitter:card" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Smartjinny" name="generator" />
-    <div className="flex justify-center">
+      <div className="flex justify-center">
       <div className="stats stats-vertical shadow">
         {data?.map((ga) => (
           <a className="stat" key={ga._id} href={`/blog/${ga.slug}`}>
-            <div className="stat-title">{ga.description}</div>
-            <div className="stat-value">{ga.title}</div>
+            <div className="stat-title whitespace-normal w-4/5 sm:w-100">{ga.description}</div>
+            <div className="stat-value whitespace-normal text-xl sm:text-3xl w-5/6 sm:w-100">{ga.title}</div>
             <div className="stat-desc">
               {new Date(ga.created).toDateString()}
             </div>
           </a>
         ))}
       </div>
-    </div>
+      </div>
+    
     </div>
   );
 }

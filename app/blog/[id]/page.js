@@ -33,7 +33,7 @@ export default async function Page({ params, searchParams }) {
         <h1 className="text-center content-center font-extrabold text-6xl">
           {data?.title}
         </h1>
-        <div className="xl:mx-40 lg:mx-30 sm:mx-20 xs:mx-5 mt-10 prose md:prose-lg lg:prose-xl prose-img:rounded-xl prose-img:max-w-lg prose-a:text-blue-600 hover:prose-a:text-blue-500 max-w-none">
+        <div className="overflow-x-hidden max-w-7xl xl:mx-40 lg:mx-30 sm:mx-20 xs:mx-5 mt-10 prose md:prose-lg lg:prose-xl prose-img:rounded-xl prose-img:max-w-lg prose-a:text-blue-600 hover:prose-a:text-blue-500">
           <div dangerouslySetInnerHTML={{ __html: data?.html }}/>
         </div>
       </div>
