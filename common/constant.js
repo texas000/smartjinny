@@ -32,10 +32,10 @@ export const GNB = [
 		path: "/avatar",
 		label: "Avatar",
 	},
-	// {
-	// 	path: "/plp",
-	// 	label: "PLP",
-	// },
+	{
+		path: "/cafe",
+		label: "Cafe",
+	},
 	// {
 	// 	path: "/pdp",
 	// 	label: "PDP",

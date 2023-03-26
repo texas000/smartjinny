@@ -65,7 +65,9 @@ export default async function Page() {
                 backend, I am able to deliver seamless and user-friendly web
                 solutions
               </p>
-              <button className="btn btn-primary">Get Started</button>
+              <a href="/cafe">
+                <button className="btn btn-primary">Go to Cafe</button>
+              </a>
             </div>
           </div>
         </div>
