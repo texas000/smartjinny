@@ -140,19 +140,18 @@ export default async function Page() {
           <div className="card w-96 bg-base-100 shadow-xl image-full">
             <figure>
               <img
-                src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                src="/model/smartjin-top.jpeg"
                 alt="Shoes"
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">MY WISHLIST!</h2>
-              <p>Wanna know the stuff that I want to get?</p>
+              <h2 className="card-title">3D AVATAR</h2>
+              <p>#3D RENDERING<br/>#THREE.JS<br/>#CUSTOMIZED</p>
               <div className="card-actions justify-end">
                 <a
-                  href="https://www.amazon.com/hz/wishlist/ls/ref=cm_wl_your_lists"
-                  target="_blank"
+                  href="/avatar"                  
                 >
-                  <button className="btn btn-primary">View Wishlist</button>
+                  <button className="btn btn-primary">View Avatar</button>
                 </a>
               </div>
             </div>
@@ -167,7 +166,7 @@ export default async function Page() {
             </figure>
             <div className="card-body">
               <h2 className="card-title">MY PLAYLIST!</h2>
-              <p>Wanna know the am I listening to?</p>
+              <p>#FAVORITE<br/>#YOUTUBE MUSIC<br/>#KOREAN</p>
               <div className="card-actions justify-end">
                 <a
                   href="https://music.youtube.com/playlist?list=PL_SamN1A4hpnAicd0cZMLVQUK4E_w_3Tj&feature=share"
@@ -188,7 +187,7 @@ export default async function Page() {
             </figure>
             <div className="card-body">
               <h2 className="card-title">MY CODING LIST!</h2>
-              <p>Wanna know the am I wrting?</p>
+              <p>#GITHUB<br/>#INTEGRATION<br/>#SMARTJINNY</p>
               <div className="card-actions justify-end">
                 <a href="https://github.com/texas000" target="_blank">
                   <button className="btn btn-primary">View Github</button>
