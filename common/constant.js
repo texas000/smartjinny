@@ -16,14 +16,10 @@ export const GNB = [
 		path: "/blog",
 		label: "Blog",
 	},
-	// {
-	// 	path: "/contact",
-	// 	label: "Contact",
-	// },
-	// {
-	// 	path: "/sign",
-	// 	label: "Login",
-	// },
+	{
+		path: "/content",
+		label: "Content",
+	},
 	{
 		path: "/search",
 		label: "Search",

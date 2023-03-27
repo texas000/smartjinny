@@ -24,3 +24,6 @@ export default function App() {
       </Canvas>
    );
 }
+
+// https://docs.pmnd.rs/react-three-fiber/getting-started/examples
+// THREE EXAMPLES

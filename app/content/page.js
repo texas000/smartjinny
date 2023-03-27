@@ -13,7 +13,14 @@ export default function Page() {
         
         // Define the onChange handler function to update the selected file
         const onChange = (event) => {
-          setFile(event.target.files[0]);
+          const selectedFile = event.target.files[0];
+          const fileSizeInBytes = selectedFile.size;
+          const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+          if (fileSizeInMB > 5) {
+            window.alert('FILE SIZE LIMIT: 5MB')
+          } else {
+            setFile(event.target.files[0]);
+          }
         };
         
         // Define the onClick handler function to send the selected file to the server
@@ -22,12 +29,13 @@ export default function Page() {
           const formData = new FormData();
           formData.append("file", file);
 
-          const res = await fetch("https://api.smartjinny.com/upload", {
+          await fetch("https://api.smartjinny.com/upload", {
             method: "POST",
             body: formData,
-          }).then((response) => response.json()).then(mutate());
-          console.log(res)
-          setLoading(false)
+          }).then(()=> {
+            setLoading(false)
+            mutate(data);
+          })
         }
     return (
       <div>
@@ -66,9 +74,44 @@ export default function Page() {
           {isLoading ? (
             <Loading />
           ) : (
-            <div className="flex justify-center w-screen">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+              {data?.map((ga) => (
+                <div
+                  className="flex max-w-xl flex-col items-center align-middle justify-between"
+                  key={ga._id}
+                >
+                  <a
+                    className="flex items-center gap-x-4 text-xs max-w-sm max-h-sm"
+                    href={`https://api.smartjinny.com/download/${ga.filename}`}
+                    target="_blank"
+                  >
+                    <div
+                      className="w-36 h-36 bg-cover bg-clip-padding hover:bg-origin-padding bg-no-repeat"
+                      style={{
+                        backgroundImage: ga.content_type.split('/')[0]==='image' ? `url(https://api.smartjinny.com/download/${ga.filename})`: 'url(https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png)',
+                      }}
+                    >
+                    </div>
+                  </a>
+                  <div className="relative font-extrabold mt-8 flex items-center gap-x-4">
+                    {ga.filename}
+                  </div>
+                  <div className="relative text-gray-500 flex items-center gap-x-4">
+                    {new Date(ga?.updated).toLocaleDateString()}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+}
+// {ga.content_type.split('/')[0]==='image' ? <img src={`https://api.smartjinny.com/download/${ga.filename}`}/> : 
+//                     <img src='https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png'/>
+{/* <div className="flex justify-center w-screen">
               <div className="stats stats-vertical shadow w-screen">
-                {data?.map((ga) => (
+                {data?.reverse().map((ga) => (
                   <a
                     className="stat hover:text-indigo-500 w-full"
                     key={ga._id}
@@ -85,9 +128,4 @@ export default function Page() {
                   </a>
                 ))}
               </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-}
+            </div> */}

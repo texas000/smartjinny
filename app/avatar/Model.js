@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { useGLTF, Html, useProgress } from "@react-three/drei";
 
+// TODO: https://docs.pmnd.rs/react-three-fiber/api/events
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/model/smartjin.glb");
@@ -13,6 +14,7 @@ export default function Model(props) {
         geometry={nodes.Wolf3D_Body.geometry}
         material={materials.Wolf3D_Body}
         skeleton={nodes.Wolf3D_Body.skeleton}
+        onClick
       />
       <skinnedMesh
         geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
