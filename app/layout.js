@@ -1,78 +1,57 @@
 import "../styles/globals.css";
 import { Constant, GNB } from "../common/constant";
 import SearchModal from "./SearchModal";
+import Script from 'next/script';
 
-export default function RootLayout({children}) {
-  
-  
-    return (
-      <html lang="en">
-        <head>
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/site.webmanifest" />
-          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
-        </head>
-        <body>
-          <div
-            className="absolute navbar bg-base-100 flex justify-between"
-            data-theme="cupcake"
-          >
-            <div className="navbar-start">
-              <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost btn-circle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h7"
-                    />
-                  </svg>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-                >
-                  {GNB.map((ga) => (
-                    <li key={ga.path}>
-                      <a href={ga.path}>{ga.label}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="navbar-center">
-              <a className="btn btn-ghost normal-case text-xl" href="/">
-                {Constant.SITE_NAME}
-              </a>
-            </div>
-            <div className="navbar-end">
-              {/* SEARCH BUTTON */}
-              <label className="btn btn-ghost" htmlFor="my-modal-6">
+export default function RootLayout({ children }) {
+
+
+  return (
+    <html lang="en">
+      <head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-N66MDW5BN0"></Script>
+        <Script
+        id='google-analytics'
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
+          gtag('config', 'G-N66MDW5BN0');
+        `,
+        }}
+        />
+      </head>
+      <body>
+        <div
+          className="absolute navbar bg-base-100 flex justify-between"
+          data-theme="cupcake"
+        >
+          <div className="navbar-start">
+            <div className="dropdown">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -84,12 +63,47 @@ export default function RootLayout({children}) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    d="M4 6h16M4 12h16M4 18h7"
                   />
                 </svg>
               </label>
-              {/* NOTI BUTTON */}
-              {/* <button className="btn btn-ghost btn-circle">
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                {GNB.map((ga) => (
+                  <li key={ga.path}>
+                    <a href={ga.path}>{ga.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="navbar-center">
+            <a className="btn btn-ghost normal-case text-xl" href="/">
+              {Constant.SITE_NAME}
+            </a>
+          </div>
+          <div className="navbar-end">
+            {/* SEARCH BUTTON */}
+            <label className="btn btn-ghost" htmlFor="my-modal-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </label>
+            {/* NOTI BUTTON */}
+            {/* <button className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,19 +122,19 @@ export default function RootLayout({children}) {
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
           </button> */}
-            </div>
-            <input type="checkbox" id="search-modal" className="modal-toggle" />
           </div>
-          <div className="pt-[64px]">{children}</div>
-          <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10">
-            <div>
-              <p>
-                Copyright © 2023 - All right reserved by {Constant.SITE_NAME}
-              </p>
-            </div>
-          </footer>
-          <SearchModal />
-        </body>
-      </html>
-    );
-  }
+          <input type="checkbox" id="search-modal" className="modal-toggle" />
+        </div>
+        <div className="pt-[64px]">{children}</div>
+        <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10">
+          <div>
+            <p>
+              Copyright © 2023 - All right reserved by {Constant.SITE_NAME}
+            </p>
+          </div>
+        </footer>
+        <SearchModal />
+      </body>
+    </html>
+  );
+}
