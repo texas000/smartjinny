@@ -1,52 +1,39 @@
+const tokens = require('@contentful/f36-tokens');
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
+const colors = Object.entries(tokens).reduce((acc, [key, value]) => {
+  // Filter Hex colors from the f36-tokens
+  if (/^#[0-9A-F]{6}$/i.test(value)) {
+    acc[key] = value;
+  }
+
+  return acc;
+}, {});
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: [
-		"./app/**/*.{js,ts,jsx,tsx}",
-		"./components/**/*.{js,ts,jsx,tsx}",
-	],
-	theme: {
-		screens: {
-			sm: "540px",
-			// => @media (min-width: 576px) { ... }
-
-			md: "720px",
-			// => @media (min-width: 768px) { ... }
-
-			lg: "960px",
-			// => @media (min-width: 992px) { ... }
-
-			xl: "1140px",
-			// => @media (min-width: 1200px) { ... }
-
-			"2xl": "1320px",
-			// => @media (min-width: 1400px) { ... }
-		},
-		container: {
-			center: true,
-			padding: "16px",
-		},
-		extend: {
-			colors: {
-				black: "#212b36",
-				dark: "#090E34",
-				"dark-700": "#090e34b3",
-				primary: "#3056D3",
-				secondary: "#13C296",
-				"body-color": "#637381",
-				warning: "#FBBF24",
-			},
-			boxShadow: {
-				input: "0px 7px 20px rgba(0, 0, 0, 0.03)",
-				pricing: "0px 39px 23px -27px rgba(0, 0, 0, 0.04)",
-				"switch-1": "0px 0px 5px rgba(0, 0, 0, 0.15)",
-				testimonial: "0px 60px 120px -20px #EBEFFD",
-			},
-		},
-	},
-	plugins: [
-		// require('@tailwindcss/typography'),
-		require("daisyui"),
-	],
-	daisyui: {
-		themes: ["cupcake"],
-	  },
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    colors,
+    extend: {
+      maxWidth: {
+        '8xl': '90rem',
+      },
+      letterSpacing: {
+        snug: '-0.011em',
+      },
+      fontSize: {
+        '2xs': '0.625rem',
+        '3xl': '1.75rem',
+        '4xl': '2.5rem',
+      },
+      lineHeight: {
+        tighter: 1.1,
+      },
+      fontFamily: {
+        sans: ['var(--font-urbanist)', ...fontFamily.sans],
+      },
+    },
+  },
+  plugins: [require('@tailwindcss/typography')],
 };
