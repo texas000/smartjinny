@@ -1,5 +1,5 @@
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, Document } from '@contentful/rich-text-types';
+import { BLOCKS, MARKS, Document } from '@contentful/rich-text-types';
 
 import { ArticleImage } from '@src/components/features/article';
 import { ComponentRichImage } from '@src/lib/__generated/sdk';
@@ -38,13 +38,20 @@ export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInter
       return <EmbeddedEntry {...entry} />;
     },
   },
+  renderMark: {
+    [MARKS.CODE]: text => (
+      <code className="block overflow-x-scroll whitespace-pre rounded-lg bg-gray900 p-3 font-sans text-gray100">
+        {text}
+      </code>
+    ),
+  },
 });
 
 export const CtfRichText = ({ json, links }: ContentfulRichTextInterface) => {
   const baseOptions = contentfulBaseRichTextOptions({ links, json });
 
   return (
-    <article className="prose prose-sm max-w-none">
+    <article className="prose-a:text-blue-600 prose-code:bg-gray-600 prose max-w-none">
       {documentToReactComponents(json, baseOptions)}
     </article>
   );
