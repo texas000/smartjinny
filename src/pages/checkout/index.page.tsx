@@ -1,10 +1,14 @@
-import { Container } from '@src/components/shared/container';
-import { useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import {
   PaymentWidgetInstance,
   loadPaymentWidget,
 } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
+import { useEffect, useRef, useState } from 'react';
+
+import { Container } from '@src/components/shared/container';
 
 const selector = '#payment-widget';
 const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
@@ -47,7 +51,7 @@ const Page = () => {
     // ------ 금액 업데이트 ------
     // https://docs.tosspayments.com/reference/widget-sdk#updateamount결제-금액
     paymentMethodsWidget.updateAmount(price, paymentMethodsWidget.UPDATE_REASON.COUPON);
-  }, [price]);
+  }, [price]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container>
